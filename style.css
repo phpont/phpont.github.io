@@ -1,159 +1,272 @@
 @import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-
-
 /* Reset padrão */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Estilos da página */
-  body {
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #444;
-    background-color: #fafafa;
-  }
-  
-  header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 36px;
-  color: #0f0;
-  text-shadow: 2px 2px #00f, -2px -2px #f00;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
+/* Estilos da página */
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #444;
+  background-color: #fafafa;
 }
 
-nav li {
-  margin: 0 20px;
-}
-
-nav a {
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px;
-  color: #fff;
-  text-decoration: none;
-  position: relative;
-}
-
-nav a:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: #0f0;
-  bottom: -5px;
-  left: 0;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-nav a:hover:before {
-  transform: scaleX(1);
-}
-
-  section {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 0 20px;
-  }
-  
-  section h2 {
-    text-align: center;
-  }
-  
-  section ul {
-    list-style: none;
-    margin-top: 30px;
-  }
-  
-  section li {
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
+/* Estilos do header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
-    background-color: #fff;
+    background-color: #4b0082;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  section li h3 {
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 42px;
+    color: #fff;
+    text-shadow: 2px 2px #00f, -2px -2px #f00;
+    margin: 0;
+    animation-name: neon;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes neon {
+    0% {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #fff, 0 0 90px #fff, 0 0 100px #fff, 0 0 150px #fff;
+    }
+    50% {
+      text-shadow: none;
+    }
+    100% {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #fff, 0 0 90px #fff, 0 0 100px #fff, 0 0 150px #fff;
+    }
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+  }
+  
+  nav li {
+    margin: 0 20px;
+  }
+  
+  nav a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+  }
+  
+  nav a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    bottom: -5px;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  nav a:hover:before {
+    transform: scaleX(1);
+  }
+  
+  
+section {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+section h2 {
+  text-align: center;
+}
+
+/* Estilos para a seção de projetos */
+section#projetos ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  section#projetos li {
+    width: calc(33.33% - 20px);
+    margin-bottom: 40px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #4b0082;
+    border-radius: 4px;
+    animation-name: slide-in;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  
+  section#projetos li h3 {
     font-size: 24px;
-  }
-  
-  section li p {
     margin-bottom: 10px;
+    color: #ffffff;
   }
   
-  section li p:last-child {
+  section#projetos li p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+  
+  section#projetos li p:last-child {
     margin-bottom: 0;
   }
   
-  section li a {
-    color: #333;
+  section#projetos li p strong {
+    font-weight: bold;
+  }
+  
+  section#projetos li a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4b0082;
+    color: #fff;
     text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
   }
   
-  section li a:hover {
-    color: #f7c873;
+  section#projetos li a:hover {
+    background-color: #2e0854;
   }
   
-  form {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
+  @media (max-width: 768px) {
+    section#projetos li {
+      width: calc(50% - 20px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    section#projetos li {
+      width: 100%;
+    }
+  }
+  
+  /* Animação de entrada para a seção de projetos */
+  @keyframes slide-in {
+    0% {
+      transform: translateY(50%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  section#projetos li a:hover {
+    background-color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    section#projetos li {
+      width: calc(50% - 20px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    section#projetos li {
+      width: 100%;
+    }
+  }
+  
+/* Estilos para a seção de formulário */
+section#contato form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 50px;
   }
   
-  form label {
-    display: block;
+  section#contato form label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #444;
     margin-bottom: 10px;
   }
   
-  form input, form textarea {
-    width: 100%;
+  section#contato form input[type="text"],
+  section#contato form input[type="email"],
+  section#contato form textarea {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #444;
     padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
     border-radius: 4px;
+    border: none;
+    background-color: #fafafa;
+    margin-bottom: 20px;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
   }
   
-  form input[type="submit"] {
-    background-color: #f7c873;
+  section#contato form input[type="text"]:focus,
+  section#contato form input[type="email"]:focus,
+  section#contato form textarea:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px #4b0082;
+  }
+  
+  section#contato form textarea {
+    height: 150px;
+    resize: none;
+  }
+  
+  section#contato form input[type="submit"] {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
     color: #fff;
-    border: none;
     padding: 10px 20px;
+    background-color: #4b0082;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
   }
   
-  form input[type="submit"]:hover {
-    background-color: #333;
+  section#contato form input[type="submit"]:hover {
+    background-color: #2e0854;
   }
   
-  footer {
-    text-align: center;
-    background-color: #f7c873;
-    color: #fff;
-    padding: 10px;
-    margin-top: 50px;
+  /* Animação de entrada para a seção de formulário */
+  @keyframes slide-in {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  section#contato form {
+    animation-name: slide-in;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
   
