@@ -26,7 +26,7 @@ header {
     background-color: #4b0082;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 42px;
@@ -38,7 +38,7 @@ header {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
   }
-  
+
   @keyframes neon {
     0% {
       text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #fff, 0 0 90px #fff, 0 0 100px #fff, 0 0 150px #fff;
@@ -50,16 +50,16 @@ header {
       text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #fff, 0 0 90px #fff, 0 0 100px #fff, 0 0 150px #fff;
     }
   }
-  
+
   nav ul {
     list-style: none;
     display: flex;
   }
-  
+
   nav li {
     margin: 0 20px;
   }
-  
+
   nav a {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
@@ -67,7 +67,7 @@ header {
     text-decoration: none;
     position: relative;
   }
-  
+
   nav a:before {
     content: "";
     position: absolute;
@@ -79,29 +79,50 @@ header {
     transform: scaleX(0);
     transition: transform 0.3s ease;
   }
-  
+
   nav a:hover:before {
     transform: scaleX(1);
   }
-  
-  
-section {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 0 20px;
-}
 
-section h2 {
-  text-align: center;
-}
+
+/* Estilos para a seção "Sobre Mim" */
+section#sobre-mim {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 0;
+    background-color: #f7f7f7;
+  }
+
+  section#sobre-mim .foto-perfil {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-image: url('https://cdn.discordapp.com/attachments/859144845422624799/1086376411507474502/Screenshot_20230317-165149_Instagram.jpg');
+    background-size: cover;
+    margin-bottom: 40px;
+  }
+
+  section#sobre-mim p {
+    max-width: 800px;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
 
 /* Estilos para a seção de projetos */
 section#projetos ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
   }
-  
+
   section#projetos li {
     width: calc(33.33% - 20px);
     margin-bottom: 40px;
@@ -114,28 +135,28 @@ section#projetos ul {
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
   }
-  
+
   section#projetos li h3 {
     font-size: 24px;
     margin-bottom: 10px;
     color: #ffffff;
   }
-  
+
   section#projetos li p {
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 20px;
     color: #ffffff;
   }
-  
+
   section#projetos li p:last-child {
     margin-bottom: 0;
   }
-  
+
   section#projetos li p strong {
     font-weight: bold;
   }
-  
+
   section#projetos li a {
     display: inline-block;
     padding: 10px 20px;
@@ -145,23 +166,23 @@ section#projetos ul {
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
   }
-  
+
   section#projetos li a:hover {
     background-color: #2e0854;
   }
-  
+
   @media (max-width: 768px) {
     section#projetos li {
       width: calc(50% - 20px);
     }
   }
-  
+
   @media (max-width: 480px) {
     section#projetos li {
       width: 100%;
     }
   }
-  
+
   /* Animação de entrada para a seção de projetos */
   @keyframes slide-in {
     0% {
@@ -173,24 +194,33 @@ section#projetos ul {
       opacity: 1;
     }
   }
-  
+
   section#projetos li a:hover {
     background-color: #333;
   }
-  
+
   @media (max-width: 768px) {
     section#projetos li {
       width: calc(50% - 20px);
     }
   }
-  
+
   @media (max-width: 480px) {
     section#projetos li {
       width: 100%;
     }
   }
-  
+
 /* Estilos para a seção de formulário */
+section#contato h2, p {
+    text-align: center;
+    animation-name: slide-in;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+
+}
+
 section#contato form {
     display: flex;
     flex-direction: column;
@@ -198,16 +228,19 @@ section#contato form {
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 20px;
   }
-  
+
   section#contato form label {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     color: #444;
     margin-bottom: 10px;
+    text-align: center;
   }
-  
+
   section#contato form input[type="text"],
   section#contato form input[type="email"],
   section#contato form textarea {
@@ -222,19 +255,19 @@ section#contato form {
     width: 100%;
     transition: all 0.2s ease-in-out;
   }
-  
+
   section#contato form input[type="text"]:focus,
   section#contato form input[type="email"]:focus,
   section#contato form textarea:focus {
     outline: none;
     box-shadow: 0 0 2px 2px #4b0082;
   }
-  
+
   section#contato form textarea {
     height: 150px;
     resize: none;
   }
-  
+
   section#contato form input[type="submit"] {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
@@ -246,11 +279,11 @@ section#contato form {
     cursor: pointer;
     transition: all 0.2s ease-in-out;
   }
-  
+
   section#contato form input[type="submit"]:hover {
     background-color: #2e0854;
   }
-  
+
   /* Animação de entrada para a seção de formulário */
   @keyframes slide-in {
     0% {
@@ -262,11 +295,10 @@ section#contato form {
       opacity: 1;
     }
   }
-  
+
   section#contato form {
     animation-name: slide-in;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
   }
-  
