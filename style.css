@@ -3,15 +3,15 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
 }
 
 header {
   text-align: center;
   padding: 50px 0;
-  background-color: #333;
-  color: #fff;
+  background: linear-gradient(to bottom right, #8c1eff, #4d0099);
+  color: #f0f0f0;
   opacity: 0.95;
   transform: translateY(0);
   transition: opacity 0.3s, transform 0.3s;
@@ -27,6 +27,19 @@ header h1 {
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  overflow: hidden; 
+  white-space: nowrap; 
+  animation: typing 4s steps(30, end) infinite; 
+}
+
+
+@keyframes typing {
+  from {
+    width: 0; 
+  }
+  to {
+    width: 100%; 
+  }
 }
 
 header p {
@@ -39,15 +52,16 @@ section {
   max-width: 900px;
   margin: 0 auto;
   padding: 50px 20px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  background-color: #2a2a2a;
+  border-radius: 10px;
 }
 
 section h2 {
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 30px;
-  color: #333;
+  color: #8c1eff;
   text-transform: capitalize;
   opacity: 0.95;
   transform: translateY(0);
@@ -62,15 +76,15 @@ section:hover h2 {
 .project {
   padding: 20px;
   border-radius: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: #4d4d4d;
+  border: 1px solid #444;
   transition: box-shadow 0.3s;
   opacity: 0.95;
   transform: translateY(0);
 }
 
 .project:hover {
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
   opacity: 1;
   transform: translateY(-5px);
 }
@@ -78,21 +92,21 @@ section:hover h2 {
 .project h3 {
   font-size: 2rem;
   margin-bottom: 15px;
-  color: #333;
+  color: #8c1eff;
   text-transform: uppercase;
 }
 
 .project p {
   font-size: 1.2rem;
   line-height: 1.6;
-  color: #666;
+  color: #f0f0f0;
 }
 
 .skills {
   max-width: 600px;
   margin: 0 auto;
   padding: 50px 20px;
-  background-color: #f9f9f9;
+  background-color: #4d4d4d;
   border-radius: 10px;
   opacity: 0.95;
   transform: translateY(0);
@@ -108,7 +122,7 @@ section:hover h2 {
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 30px;
-  color: #333;
+  color: #8c1eff;
   text-transform: capitalize;
 }
 
@@ -121,7 +135,7 @@ section:hover h2 {
 .skills li {
   font-size: 1.3rem;
   margin-bottom: 15px;
-  color: #333;
+  color: #f0f0f0;
 }
 
 .contact {
@@ -129,7 +143,7 @@ section:hover h2 {
   margin: 0 auto;
   padding: 50px 20px;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: #4d4d4d;
   border-radius: 10px;
   opacity: 0.95;
   transform: translateY(0);
@@ -144,7 +158,7 @@ section:hover h2 {
 .contact h2 {
   font-size: 2.5rem;
   margin-bottom: 30px;
-  color: #333;
+  color: #8c1eff;
   text-transform: capitalize;
 }
 
@@ -152,15 +166,15 @@ section:hover h2 {
   font-size: 1.3rem;
   line-height: 1.8;
   margin-bottom: 30px;
-  color: #666;
+  color: #f0f0f0;
 }
 
 .social-links a {
   display: inline-block;
   margin: 5px;
   font-size: 1.3rem;
-  color: #fff;
-  background-color: #333;
+  color: #f0f0f0;
+  background: linear-gradient(to bottom right, #8c1eff, #4d0099);
   padding: 15px 30px;
   border-radius: 30px;
   text-decoration: none;
@@ -168,7 +182,7 @@ section:hover h2 {
 }
 
 .social-links a:hover {
-  background-color: #444;
+  background: linear-gradient(to bottom right, #4d0099, #8c1eff);
   transform: scale(1.05);
 }
 
