@@ -14,6 +14,34 @@
   <link rel="stylesheet" href="main.css">
 
   <title>Paulo Pontarolo - Portfolio</title>
+  <style>
+    #main-title {
+      font-size: clamp(1.3rem, 4vw, 2.5rem);
+    }
+
+    @media (max-width: 640px) {
+      #contact h2 {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+      }
+
+      #contact p {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+      }
+
+      .contact-buttons a {
+        font-size: clamp(0.875rem, 3vw, 1rem);
+        padding: 10px 16px;
+        /* Ajuste conforme necessário */
+        margin-bottom: 10px;
+        /* Adiciona espaço entre os botões em telas pequenas */
+      }
+
+      .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-gray-900 text-gray-100">
@@ -38,15 +66,19 @@
       <div class="about-text w-full md:w-1/2 px-6">
         <h2 class="about-title text-3xl font-semibold mb-4">About Me</h2>
         <p class="about-description text-lg">
-          Hello! I'm Paulo Henrique Pontarolo, a 17-year-old enthusiast passionate about programming since I was 10. Currently, I stand out as a fullstack developer with proficiency in various languages such as C#, Python, and a deep involvement in the world of front-end development.
-        
-          My journey has been a constant search for challenges and knowledge. I believe that programming is an ever-evolving art, and I'm always eager to explore new horizons.
-        
-          In this space, I share my passion for technology and development. Feel free to explore and learn more about my work and projects.
-        
+          Hello! I'm Paulo Henrique Pontarolo, a 17-year-old enthusiast passionate about programming since I was 10.
+          Currently, I stand out as a fullstack developer with proficiency in various languages such as C#, Python, and
+          a deep involvement in the world of front-end development.
+
+          My journey has been a constant search for challenges and knowledge. I believe that programming is an
+          ever-evolving art, and I'm always eager to explore new horizons.
+
+          In this space, I share my passion for technology and development. Feel free to explore and learn more about my
+          work and projects.
+
           Thank you very much for visiting my Portfolio.
         </p>
-        
+
       </div>
     </section>
 
@@ -84,15 +116,14 @@
     <section id="contact" class="py-10 px-4 space-y-4 rounded-lg text-center">
       <h2 class="text-3xl font-semibold text-white">Contact</h2>
       <p class="text-lg text-white">Let's connect! You can find me on:</p>
-      <div class="flex justify-center space-x-4">
+      <div class="flex justify-center space-x-4 contact-buttons">
         <a href="https://www.instagram.com/paulinhopontarolo" target="_blank"
           class="button text-white px-4 py-2">Instagram</a>
         <a href="https://github.com/phpont" target="_blank"
           class="button text-white px-4 py-2">GitHub</a>
         <a href="https://www.linkedin.com/in/paulo-pontarolo-0464a3263/" target="_blank"
           class="button text-white px-4 py-2">LinkedIn</a>
-      </div>
-    </section>
+      </div>      
   </main>
 
   <!-- Footer -->
