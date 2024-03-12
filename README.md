@@ -1,26 +1,26 @@
-# Paulo Henrique Pontarolo - Portfólio
+# Paulo Henrique Pontarolo - Portfolio
 
-![Imagem de Perfil](fotominha.jpg)
+![Profile Image](fotominha.jpg)
 
-Olá! 👋 Eu sou Paulo Henrique Pontarolo, um desenvolvedor fullstack apaixonado pela programação desde os meus 10 anos. Neste repositório, você encontrará informações sobre mim, os projetos em que trabalhei e as tecnologias que domino.
+Hello! 👋 I'm Paulo Henrique Pontarolo, a fullstack developer passionate about programming since I was 10 years old. In this repository, you will find information about me, the projects I have worked on, and the technologies I master.
 
-## Sobre Mim
+## About Me
 
-Atualmente com 17 anos, minha jornada na programação tem sido uma busca constante por desafios e conhecimento. Acredito que a programação é uma arte em constante evolução, e estou sempre ávido para explorar novos horizontes.
+Currently 17 years old, my programming journey has been a constant search for challenges and knowledge. I believe that programming is an art in constant evolution, and I am always eager to explore new horizons.
 
-### Proficiência em Linguagens
+### Proficiency in Languages
 
 - C#
 - Python
 - HTML, CSS, JavaScript
 
-## Tecnologias que Trabalho
+## Technologies I Work With
 
 - HTML, CSS, JavaScript
 - C#, ASP.NET
 - Python
-- E muitas outras...
+- And many more...
 
-## Contato
+## Contact
 
-Vamos nos conectar! Você pode me encontrar no [Instagram](https://www.instagram.com/paulohenriquepontarolo).
+Let's connect! You can find me on [Instagram](https://www.instagram.com/paulinhopontarolo).
