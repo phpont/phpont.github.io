@@ -1,95 +1,103 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Importe o CSS do Tailwind CSS via CDN -->
+  <!-- Import Tailwind CSS via CDN -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src='script.js'></script>
 
-  <!-- Importe o seu arquivo de estilos CSS -->
+  <!-- Import your custom CSS file -->
   <link rel="stylesheet" href="main.css">
 
-  <title>Paulo Pontarolo - Portfólio</title>
+  <title>Paulo Pontarolo - Portfolio</title>
 </head>
 
 <body class="bg-gray-900 text-gray-100">
-  <!-- Cabeçalho -->
+  <!-- Header -->
   <header>
     <div class="container mx-auto">
       <h1 class="text-4xl font-bold text-center text-white" id="main-title"></h1>
-      <p class="text-xl text-center text-white">Desenvolvedor Fullstack</p>
+      <p class="text-xl text-center text-white">Fullstack Developer</p>
     </div>
   </header>
 
-  <!-- Conteúdo Principal -->
+  <!-- Main Content -->
   <main class="container mx-auto mt-8 p-4 space-y-8">
-    <!-- Sobre Mim -->
+    <!-- About Me -->
     <section id="about" class="about-section py-10 px-4 space-y-4 flex items-center">
-      <!-- Imagem à esquerda -->
+      <!-- Image on the left -->
       <div class="about-image w-full md:w-1/2 mx-auto">
-        <img src="fotominha.jpg" alt="Foto de Paulo Henrique Pontarolo"
-          class="profile-picture w-full h-auto rounded-lg shadow-lg">
+        <img src="fotominha.jpg" alt="Paulo Henrique Pontarolo's Photo"
+          class="profile-picture w-full h-auto rounded-lg shadow-lg ">
       </div>
-      <!-- Texto à direita -->
+      <!-- Text on the right -->
       <div class="about-text w-full md:w-1/2 px-6">
-        <h2 class="about-title text-3xl font-semibold mb-4">Sobre Mim</h2>
+        <h2 class="about-title text-3xl font-semibold mb-4">About Me</h2>
         <p class="about-description text-lg">
-          Olá! Eu sou o Paulo Henrique Pontarolo, tenho 17 anos e sou um entusiasta apaixonado pela programação desde os 10. Atualmente, me destaco como um desenvolvedor fullstack com proficiência em diversas linguagens, como C#, Python, e um profundo envolvimento no mundo do desenvolvimento front-end.
+          Hello! I'm Paulo Henrique Pontarolo, a 17-year-old enthusiast passionate about programming since I was 10. Currently, I stand out as a fullstack developer with proficiency in various languages such as C#, Python, and a deep involvement in the world of front-end development.
         
-          Minha jornada tem sido uma busca constante por desafios e conhecimento. Acredito que a programação é uma arte em constante evolução, e estou sempre ávido para explorar novos horizontes.
+          My journey has been a constant search for challenges and knowledge. I believe that programming is an ever-evolving art, and I'm always eager to explore new horizons.
         
-          Neste espaço, compartilho minha paixão pela tecnologia e desenvolvimento. Sinta-se à vontade para explorar e conhecer mais sobre meu trabalho e projetos.
+          In this space, I share my passion for technology and development. Feel free to explore and learn more about my work and projects.
         
-          Muito obrigado por visitar meu Portfólio.
+          Thank you very much for visiting my Portfolio.
         </p>
         
       </div>
     </section>
 
 
-    <!-- Tecnologias que Trabalho -->
+    <!-- Technologies I Work With -->
     <section id="technologies" class="text-white rounded-lg p-6 space-y-4 text-center">
-      <h2 class="text-3xl font-semibold">Tecnologias que Trabalho</h2>
+      <h2 class="text-3xl font-semibold">Technologies I Work With</h2>
       <ul class="text-lg list-disc list-inside mt-2">
         <li>HTML, CSS, JavaScript</li>
         <li>C#, ASP.NET</li>
         <li>Python</li>
-        <li>E muitas outras...</li>
+        <li>Frontend Frameworks</li>
+        <li>Java</li>
+        <li>And many more...</li>
       </ul>
     </section>
 
-    <!-- Projetos -->
-    <section id="projects" class="text-white rounded-lg p-6 space-y-4 text-center "">
-      <h2 class=" text-3xl font-semibold">Projetos</h2>
+    <!-- Projects -->
+    <section id="projects" class="text-white rounded-lg p-6 space-y-4 text-center">
+      <h2 class="text-3xl font-semibold">Projects</h2>
       <div>
-        <!-- Exemplo de Card de Projeto -->
+        <!-- Example Project Card -->
         <div class="bg-gray-700 p-4 rounded-lg shadow-lg mx-auto">
-          <h3 class="text-xl font-semibold text-white">Projeto 1</h3>
-          <p class="mt-2 text-gray-300">Seja o primeiro!
+          <h3 class="text-xl font-semibold text-white">Project 1</h3>
+          <p class="mt-2 text-gray-300">Be the first!
           </p>
-          <a href="https://www.instagram.com/paulohenriquepontarolo" class="mt-4 block button">Saiba mais</a>
+          <a href="https://www.linkedin.com/in/paulo-pontarolo-0464a3263/" class="mt-4 block button">Learn More</a>
         </div>
 
-        <!-- Repita esse bloco para mais projetos -->
+        <!-- Repeat this block for more projects -->
       </div>
     </section>
 
-    <!-- Contato -->
+    <!-- Contact -->
     <section id="contact" class="py-10 px-4 space-y-4 rounded-lg text-center">
-      <h2 class="text-3xl font-semibold text-white">Contato</h2>
-      <p class="text-lg text-white">Vamos nos conectar! Você pode me encontrar no Instagram:</p>
-      <a href="https://www.instagram.com/paulohenriquepontarolo" target="_blank"
-        class="mt-2 inline-block button text-white px-4 py-2">Visitar Instagram</a>
+      <h2 class="text-3xl font-semibold text-white">Contact</h2>
+      <p class="text-lg text-white">Let's connect! You can find me on:</p>
+      <div class="flex justify-center space-x-4">
+        <a href="https://www.instagram.com/paulinhopontarolo" target="_blank"
+          class="button text-white px-4 py-2">Instagram</a>
+        <a href="https://github.com/phpont" target="_blank"
+          class="button text-white px-4 py-2">GitHub</a>
+        <a href="https://www.linkedin.com/in/paulo-pontarolo-0464a3263/" target="_blank"
+          class="button text-white px-4 py-2">LinkedIn</a>
+      </div>
     </section>
   </main>
 
-  <!-- Rodapé -->
+  <!-- Footer -->
   <footer class="text-white py-4 text-center">
-    &copy; 2023 Meu Portfólio | Desenvolvido por Paulo Henrique Pontarolo
+    &copy; 2023 My Portfolio | Developed by Paulo Henrique Pontarolo
   </footer>
 
 </body>
