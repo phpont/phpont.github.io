@@ -1,4 +1,4 @@
-/* Reset de Estilos Padrão */
+
 html, body, div, h1, h2, p, ul, li, a {
   margin: 0;
   padding: 0;
@@ -153,26 +153,14 @@ a {
               0 0 50px rgb(0,140,255),
               0 0 100px rgb(0,140,255);
 }
-/* Media Queries para Tablets */
-@media screen and (max-width: 768px) {
-  header h1 {
-    font-size: 6rem;
-  }
-  header p {
-    font-size: 1.2rem;
-  }
-  .container {
-    padding: 1rem;
-  }
+#main-title {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
 }
 
 /* Media Queries para Smartphones */
 @media screen and (max-width: 480px) {
-  header h1 {
-    font-size: 2rem;
-  }
   #about p{
-    font-size: 0.3rem;
+    font-size: 0.7rem;
   }
   header p {
     font-size: 1rem;
