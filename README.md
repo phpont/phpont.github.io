@@ -1,6 +1,6 @@
 # Paulo Henrique Pontarolo - Portfolio
 
-![Profile Image](fotominha.jpg)
+
 
 Hello! 👋 I'm Paulo Henrique Pontarolo, a fullstack developer passionate about programming since I was 10 years old. In this repository, you will find information about me, the projects I have worked on, and the technologies I master.
 
