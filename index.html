@@ -1,132 +1,1009 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paulo // Full‑Stack Chaos Wizard</title>
+    <meta name="description"
+        content="Dark old‑web themed portfolio with modern effects. Full‑stack developer who can ship in any stack." />
+    <meta name="theme-color" content="#0b0e12" />
 
-  <!-- Import Tailwind CSS via CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src='script.js'></script>
+    <!-- SEO / Social (no external assets used) -->
+    <meta property="og:title" content="Paulo // Full‑Stack Chaos Wizard">
+    <meta property="og:description" content="I build cool stuff fast. Any stack, any language.">
+    <meta property="og:type" content="website">
 
-  <!-- Import your custom CSS file -->
-  <link rel="stylesheet" href="main.css">
+    <style>
+        :root {
+            --bg: #0b0e12;
+            /* deep void */
+            --bg-2: #0f131a;
+            /* panel */
+            --ink: #d6e2ff;
+            /* readable text */
+            --muted: #a0a8bf;
+            /* secondary */
+            --edge: #10131a;
+            /* card edge */
+            --neon: #00ffc6;
+            /* mint neon */
+            --mag: #ff00b3;
+            /* magenta neon */
+            --acid: #8aff00;
+            /* slime neon */
+            --warn: #ffea00;
+            /* cyber yellow */
+            --shadow: rgba(0, 0, 0, .55);
+        }
 
-  <title>Paulo Pontarolo - Portfolio</title>
-  <style>
-    #main-title {
-      font-size: clamp(1.3rem, 4vw, 2.5rem);
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    @media (max-width: 640px) {
-      #contact h2 {
-        font-size: clamp(1.25rem, 4vw, 1.75rem);
-      }
+        html,
+        body {
+            height: 100%
+        }
 
-      #contact p {
-        font-size: clamp(1rem, 3vw, 1.25rem);
-      }
+        html {
+            scroll-behavior: smooth
+        }
 
-      .contact-buttons a {
-        font-size: clamp(0.875rem, 3vw, 1rem);
-        padding: 10px 16px;
-        /* Ajuste conforme necessário */
-        margin-bottom: 10px;
-        /* Adiciona espaço entre os botões em telas pequenas */
-      }
+        /* Garanta que o overlay global fique “lá no fundo” */
+        body {
+            position: relative;
+        }
 
-      .contact-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+        body::before,
+        body::after {
+            z-index: 0;
+        }
+
+        /* E o conteúdo por cima do overlay */
+        header,
+        main,
+        footer,
+        dialog {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* mais previsível que margin “solta” (evita colapso esquisito com vizinhos) */
+        section {
+            padding-top: 52px;
+            margin: 0;
+        }
+
+        /* evita que sombras grandes criem barras aparentes nas bordas do container */
+        .wrap {
+            position: relative;
+            z-index: 1;
+            overflow: visible;
+        }
+
+        /* o separador continua fininho sem parecer uma faixa */
+        .sep {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1b2230, transparent);
+            margin: 24px 0;
+        }
+
+
+        /* Evita bleed/blend estranho dentro das seções quando há mix-blend/shadows */
+        section,
+        .grid,
+        .card,
+        .terminal {
+            isolation: isolate;
+        }
+
+        /* O ticker às vezes ficava “abaixo” do sticky com blur */
+        .nav {
+            z-index: 40;
+        }
+
+        .ticker {
+            position: relative;
+            z-index: 41;
+        }
+        #gb > form > div > button {
+            font: 15px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: #ffff;
+            --ring: var(--neon);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid #1e2533;
+            background: linear-gradient(180deg, #0f1420, #0b0f18);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04), 0 10px 30px rgba(0, 0, 0, .6);
+            color: var(--ink);
+            font-weight: 700;
+            letter-spacing: .2px;
+            transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+            will-change: transform;
+        }
+         #gb > form > div > button:hover {
+            border-color: var(--ring);
+            transform: translateY(-1.5px) scale(1.01);
+            box-shadow: 0 0 20px color-mix(in oklab, var(--ring) 30%, transparent);
+         }
+        body {
+            margin: 0;
+            font: 15px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--ink);
+            background: radial-gradient(1200px 800px at 10% -10%, #121826 0, rgba(18, 24, 38, 0) 60%),
+                radial-gradient(1600px 1000px at 110% 10%, #111a2b 0, rgba(17, 26, 43, 0) 60%),
+                radial-gradient(900px 600px at 50% 120%, #0a0c11 0, #0b0e12 60%);
+            background-color: var(--bg);
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* CRT Scanlines + Vignette */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .14;
+            mix-blend-mode: soft-light;
+            background: repeating-linear-gradient(transparent 0 2px, rgba(255, 255, 255, .06) 2px 3px);
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: -2rem;
+            pointer-events: none;
+            box-shadow: inset 0 0 200px 80px #000;
+        }
+
+        a {
+            color: var(--neon);
+            text-decoration: none
+        }
+
+        a:hover {
+            filter: drop-shadow(0 0 8px var(--neon));
+        }
+
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 24px
+        }
+
+        /* NAV */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(11, 14, 18, .7);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #161a22;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            letter-spacing: .8px
+        }
+
+        .brand .dot {
+            width: 10px;
+            height: 10px;
+            background: conic-gradient(from 0deg, var(--neon), var(--mag), var(--acid), var(--neon));
+            border-radius: 50%;
+            filter: blur(.4px) brightness(1.3);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px
+        }
+
+        .nav a {
+            color: var(--ink)
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 18px
+        }
+
+        .nav li a {
+            display: inline-block;
+            padding: 10px 12px;
+            border: 1px solid #1b2030;
+            background: #0e1219;
+            border-radius: 10px
+        }
+
+        .nav li a:hover {
+            border-color: var(--neon);
+            box-shadow: 0 0 16px rgba(0, 255, 198, .25)
+        }
+
+        /* Old‑web Marquee */
+        .ticker {
+            display: block;
+            margin-top: 12px;
+            border: 1px dashed #2a3246;
+            padding: 6px 10px;
+            color: var(--muted);
+            background: #0c1016
+        }
+
+        .ticker marquee {
+            font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: #9bd6ff
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 26px;
+            align-items: center;
+            min-height: clamp(520px, 70svh, 900px);
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .glitch {
+            position: relative;
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: -.5px;
+            max-width: 860px;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, .35));
+        }
+
+        .glitch .big {
+            font-size: clamp(32px, 6.5vw, 78px);
+            margin-bottom: 12px;
+        }
+
+        .glitch .sub {
+            font-size: clamp(16px, 2.8vw, 24px);
+            color: var(--muted);
+        }
+
+        /* glitch layers */
+        .glitch span[data-text] {
+            position: relative;
+            display: block;
+        }
+
+        .glitch span[data-text]::before,
+        .glitch span[data-text]::after {
+            content: attr(data-text);
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .glitch span[data-text]::before {
+            transform: translate(-2px, -1px);
+            color: var(--mag);
+            clip-path: inset(0 0 50% 0);
+        }
+
+        .glitch span[data-text]::after {
+            transform: translate(2px, 1px);
+            color: var(--neon);
+            clip-path: inset(50% 0 0 0);
+        }
+
+        @keyframes jitter {
+
+            0%,
+            100% {
+                transform: translate(0, 0)
+            }
+
+            20% {
+                transform: translate(1px, -1px)
+            }
+
+            40% {
+                transform: translate(-1px, 1px)
+            }
+
+            60% {
+                transform: translate(2px, 1px)
+            }
+
+            80% {
+                transform: translate(-2px, -1px)
+            }
+        }
+
+        .jitter {
+            animation: jitter 1.6s steps(2) infinite;
+        }
+
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .btn {
+            --ring: var(--neon);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid #1e2533;
+            background: linear-gradient(180deg, #0f1420, #0b0f18);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04), 0 10px 30px rgba(0, 0, 0, .6);
+            color: var(--ink);
+            font-weight: 700;
+            letter-spacing: .2px;
+            transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+            will-change: transform;
+        }
+
+        .btn:hover {
+            border-color: var(--ring);
+            transform: translateY(-1.5px) scale(1.01);
+            box-shadow: 0 0 20px color-mix(in oklab, var(--ring) 30%, transparent);
+        }
+
+        .btn .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--ring);
+            filter: drop-shadow(0 0 8px var(--ring));
+        }
+
+        .btn.alt {
+            --ring: var(--mag);
+        }
+
+        /* remova as outras definições de .terminal e fique com esta */
+        .terminal {
+            border: 1px solid #153022;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #06110d, #050c09);
+            overflow: hidden;
+        }
+
+        .terminal .bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-bottom: 1px solid #153022;
+            background: #07140f;
+        }
+
+        .terminal pre {
+            margin: 0;
+            padding: 16px;
+            color: #9dffb3;
+            font: 14px/1.55 ui-monospace, Menlo, Consolas, monospace;
+            overflow-x: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border: 1px dashed #2d3447;
+            border-radius: 999px;
+            background: #0d121b;
+            color: #b4bdd2;
+            font: 12px/1.1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
+        }
+
+        h2 {
+            font-size: clamp(20px, 3vw, 28px);
+            margin: 0 0 10px
+        }
+
+        .section-sub {
+            color: var(--muted);
+            margin: 0 0 22px
+        }
+
+        .tagwall {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px
+        }
+
+        .tag {
+            border: 1px solid #20283a;
+            background: linear-gradient(180deg, #0c121b, #0a0f16);
+            color: #a9b2ca;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font: 13px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            position: relative;
+            isolation: isolate;
+        }
+
+        .tag::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: .5;
+            pointer-events: none;
+            background: conic-gradient(from var(--a, 0deg), transparent 0 60%, color-mix(in oklab, var(--neon) 45%, transparent) 60% 65%, transparent 65% 100%);
+            filter: blur(12px);
+            animation: sweep 3.5s linear infinite;
+        }
+
+        @keyframes sweep {
+            to {
+                --a: 360deg
+            }
+        }
+
+        /* PROJECTS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        @media (max-width:1000px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media (max-width:640px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            position: relative;
+            border: 1px solid #1a2130;
+            border-radius: 18px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #0c1119, #0a0e15);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(255, 255, 255, .03);
+            transition: transform .15s ease, box-shadow .2s ease;
+            will-change: transform;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 40px 120px rgba(0, 0, 0, .7), 0 0 40px rgba(0, 255, 198, .08)
+        }
+
+        .card .glow {
+            position: absolute;
+            inset: -2px;
+            border-radius: 20px;
+            pointer-events: none;
+            opacity: .0;
+            background: conic-gradient(from 0deg, color-mix(in oklab, var(--neon) 45%, transparent), color-mix(in oklab, var(--mag) 45%, transparent), transparent 30%);
+            filter: blur(20px);
+            transition: opacity .2s ease
+        }
+
+        .card:hover .glow {
+            opacity: .5
+        }
+
+        .thumb {
+            height: 160px;
+            background:
+                linear-gradient(transparent, rgba(0, 0, 0, .5)),
+                repeating-linear-gradient(90deg, rgba(0, 255, 200, .08) 0 2px, rgba(255, 0, 160, .08) 2px 4px),
+                radial-gradient(120px 80px at 20% 30%, rgba(0, 255, 198, .25), transparent 60%),
+                radial-gradient(120px 80px at 80% 70%, rgba(255, 0, 179, .25), transparent 60%),
+                #0d121a;
+            border-bottom: 1px solid #1a2130;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thumb::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(transparent 0 6px, rgba(255, 255, 255, .03) 6px 7px);
+            opacity: .4
+        }
+
+        .thumb .label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font: 12px/1.1 ui-monospace, Menlo, Consolas;
+            color: #a3ffd2;
+            border: 1px solid #1f2b2b;
+            background: #07130f;
+            padding: 4px 8px;
+            border-radius: 8px
+        }
+
+        .content {
+            padding: 16px
+        }
+
+        .content h3 {
+            margin: 0 0 8px;
+            font-size: 18px
+        }
+
+        .content p {
+            margin: 0 0 12px;
+            color: #a9b2ca
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        /* ABOUT (pseudo-terminal) */
+        .terminal {
+            border: 1px solid #153022;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #06110d, #050c09);
+            overflow: hidden
+        }
+
+        .terminal .bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-bottom: 1px solid #153022;
+            background: #07140f
+        }
+
+        .dotr,
+        .doty,
+        .dotg {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%
+        }
+
+        .dotr {
+            background: #ff5f56
+        }
+
+        .doty {
+            background: #ffbd2e
+        }
+
+        .dotg {
+            background: #27c93f
+        }
+
+        .terminal pre {
+            margin: 0;
+            padding: 16px;
+            color: #9dffb3;
+            font: 14px/1.55 ui-monospace, Menlo, Consolas, monospace
+        }
+
+        .blink {
+            animation: blink 1s steps(2, start) infinite;
+        }
+
+        @keyframes blink {
+            to {
+                visibility: hidden
+            }
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 22px
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(var(--neon), var(--mag))
+        }
+
+        .tl-item {
+            position: relative;
+            margin: 10px 0 14px;
+            padding-left: 15px;
+        }
+
+        .tl-item::before {
+            content: "";
+            position: absolute;
+            left: -1px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--neon);
+            box-shadow: 0 0 12px rgba(0, 255, 198, .6)
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 24px;
+            border-top: 1px solid #171c27;
+            color: #8e98b3;
+            text-align: center;
+            background: #0b0f15
+        }
+
+        /* Utility */
+        .muted {
+            color: var(--muted)
+        }
+
+        .sp {
+            height: 10px
+        }
+
+        .sep {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1b2230, transparent);
+            margin: 16px 0
+        }
+
+        .old-badge {
+            font: 11px/1.1 ui-monospace, Menlo, Consolas;
+            color: #c7d2f3;
+            border: 1px dashed #2b3550;
+            padding: 4px 6px;
+            border-radius: 6px;
+            background: #0d1220
+        }
+
+        /* Guestbook pop */
+        dialog {
+            border: 1px solid #26314b;
+            border-radius: 16px;
+            background: #0c111a;
+            color: var(--ink);
+            box-shadow: 0 40px 120px rgba(0, 0, 0, .7)
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, .6)
+        }
+
+        .x {
+            cursor: pointer;
+            border: 1px solid #2a3347;
+            background: #0e1420;
+            border-radius: 10px;
+            padding: 8px 12px
+        }
+
+        /* Konami Y2K mode */
+        body.y2k {
+            filter: contrast(1.1) saturate(1.1)
+        }
+
+        body.y2k,
+        body.y2k * {
+            font-family: "Courier New", ui-monospace, Menlo, Consolas, monospace
+        }
+
+        body.y2k .card {
+            image-rendering: pixelated
+        }
+
+        /* Back to top */
+        .topbtn {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid #1e2536;
+            background: #0c111a;
+            color: var(--ink);
+            opacity: .85
+        }
+
+        .topbtn:hover {
+            opacity: 1;
+            border-color: var(--neon)
+        }
+
+        /* Responsive niceties */
+        @media (max-width:520px) {
+            .nav ul {
+                gap: 10px
+            }
+
+            .nav li a {
+                padding: 8px 10px
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100">
-  <!-- Header -->
-  <header>
-    <div class="container mx-auto">
-      <h1 class="text-4xl font-bold text-center text-white" id="main-title"></h1>
-      <p class="text-xl text-center text-white">Fullstack Developer</p>
-    </div>
-  </header>
+<body>
+    <main class="wrap" id="home">
+        <section class="hero">
+            <div>
+                <div class="badge">Available for cool gigs / collabs</div>
+                <div class="glitch" style="margin-top:10px">
+                    <span class="big jitter" data-text="I'm Paulo.">I'm Paulo.</span>
+                    <span class="big" data-text="Full‑Stack Dev.">Full‑Stack Dev.
+                    </span>
+                    <span class="sub" data-text="I build web/apps/APIs that slap. Clean, fast, no drama.">I build
+                        web/apps/APIs that slap. Clean, fast, no drama.</span>
+                </div>
+                <div class="cta">
+                    <a class="btn" href="#work" title="Check the goods"><span class="dot"></span> See projects</a>
+                    <a class="btn alt" href="mailto:paulohponta@gmail.com" id="emailBtn" title="Say hi"><span
+                            class="dot"></span> Email me</a>
+                    <button class="btn" id="copyMail" title="Copy email"><span class="dot"></span> Copy email</button>
+                </div>
+                <div class="sp"></div>
+                <p class="muted">Also down to talk systems design, game dev, weird automations, and other nerdy stuff.
+                </p>
+            </div>
+            <div>
+                <div class="terminal">
+                    <div class="bar"><span class="dotr"></span><span class="doty"></span><span class="dotg"></span><span
+                            style="margin-left:8px;color:#7bb899">~/whoami.sh</span></div>
+                    <pre>
+<span style="color:#6adf9b">$</span> cat whoami.txt
+> name: "paulo"
+> vibe: "java enjoyer, ships on fridays"
+> skills: ["develops almost anything", "debugs with vibes", "deploys without fear"]
+> languages: "all of them lol — JS/TS, Python, Go, Rust, C/C++, PHP, C#, Java, you name it"
+> stacks: "Node, Deno, Bun, React/Next, SvelteKit, Vue/Nuxt, Django/FastAPI, Laravel, .NET, Spring Boot…"
+> infra: "Docker, k8s, CI/CD, AWS/GCP/Azure, Postgres/MySQL/Redis/Kafka"
 
-  <!-- Main Content -->
-  <main class="container mx-auto mt-8 p-4 space-y-8">
-    <!-- About Me -->
-    <section id="about" class="about-section py-10 px-4 space-y-4 flex items-center">
+<span style="color:#6adf9b">$</span> echo "let’s build something dope" <span class="blink">█</span>
+</pre>
+                </div>
+            </div>
+        </section>
 
-      <!-- Text on the right -->
-      <div class="about-text w-full md:w-1/2 px-6">
-        <h2 class="about-title text-3xl font-semibold mb-4">About Me</h2>
-        <p class="about-description text-lg">
-          Hello! I'm Paulo Henrique Pontarolo, a 17-year-old enthusiast passionate about programming since I was 10.
-          Currently, I stand out as a fullstack developer with proficiency in various languages such as C#, Python, and
-          a deep involvement in the world of front-end development.
+        <section id="skills">
+            <h2>Skills? Yeah, I collect those.</h2>
+            <p class="section-sub">If it runs on electrons, I can make it sing. Here’s a teaser:</p>
+            <div class="tagwall">
+                <span class="tag">JavaScript / TypeScript</span>
+                <span class="tag">Python</span>
+                <span class="tag">Go</span>
+                <span class="tag">Rust</span>
+                <span class="tag">C# / .NET</span>
+                <span class="tag">C / C++</span>
+                <span class="tag">Java / Kotlin</span>
+                <span class="tag">PHP / Laravel</span>
+                <span class="tag">Node / Deno / Bun</span>
+                <span class="tag">React / Next.js</span>
+                <span class="tag">Svelte / SvelteKit</span>
+                <span class="tag">Vue / Nuxt</span>
+                <span class="tag">Django / FastAPI</span>
+                <span class="tag">Postgres / MySQL</span>
+                <span class="tag">MongoDB / Redis</span>
+                <span class="tag">Kafka / RabbitMQ</span>
+                <span class="tag">Docker / k8s</span>
+                <span class="tag">AWS / GCP / Azure</span>
+                <span class="tag">CI/CD enjoyer</span>
+                <span class="tag">TDD (when it matters)</span>
+                <span class="tag">Perf & Sec</span>
+            </div>
+        </section>
 
-          My journey has been a constant search for challenges and knowledge. I believe that programming is an
-          ever-evolving art, and I'm always eager to explore new horizons.
+        <div class="sep"></div>
 
-          In this space, I share my passion for technology and development. Feel free to explore and learn more about my
-          work and projects.
+        <section id="work">
+            <h2>Projects that go hard</h2>
+            <p class="section-sub">A few bangers. Most repos are private — ask nicely and I might flex.</p>
+            <div class="grid">
+                <!-- Project -->
+                <article class="card tilt">
+                    <div class="glow"></div>
+                    <div class="thumb"><span class="label">PHP • MySQL • Vanilla JS</span></div>
+                    <div class="content">
+                        <h3>Client & Contract Manager</h3>
+                        <p>Lightweight back-office app for small businesses. Handles clients, contracts, payments, and
+                            all that jazz — with auto-validation so users don’t rage-quit on forms.</p>
+                        <div class="meta">
+                            <span class="old-badge">Role: full-stack builder</span>
+                        </div>
+                    </div>
+                </article>
 
-          Thank you very much for visiting my Portfolio.
-        </p>
+                <!-- Project 2 -->
+                <article class="card tilt">
+                    <div class="glow"></div>
+                    <div class="thumb"><span class="label">C++ • WinAPI</span></div>
+                    <div class="content">
+                        <h3>Ghost Injector</h3>
+                        <p>Educational DLL injector for some games. Clean UI, safe toggles.</p>
+                        <div class="meta">
+                            <span class="old-badge">Role: systems</span>
+                        </div>
+                    </div>
+                </article>
 
-      </div>
-    </section>
+                <!-- Project 3 -->
+                <article class="card tilt">
+                    <div class="glow"></div>
+                    <div class="thumb"><span class="label">C# • WinUI • AHK</span></div>
+                    <div class="content">
+                        <h3>Macro Maestro</h3>
+                        <p>Record-and-replay with pixel triggers, cooldowns, and per-game profiles. Built for grindy runs.</p>
+                        <div class="meta">
+                            <span class="old-badge">Role: backend + desktop</span>
+                        </div>
+                    </div>
+                </article>
 
+                <!-- Project 4 -->
+                <article class="card tilt">
+                    <div class="glow"></div>
+                    <div class="thumb"><span class="label">Python • ADB • Automation</span></div>
+                    <div class="content">
+                        <h3>Account Forge</h3>
+                        <p>End-to-end email account onboarding for test rigs: emulator control, 2FA flows, retry logic,
+                            and tidy logs. Browser profiles stay isolated.</p>
+                        <div class="meta">
+                            <span class="old-badge">Role: automation</span>
+                        </div>
+                    </div>
+                </article>
 
-    <!-- Technologies I Work With -->
-    <section id="technologies" class="text-white rounded-lg p-6 space-y-4 text-center">
-      <h2 class="text-3xl font-semibold">Technologies I Work With</h2>
-      <ul class="text-lg list-disc list-inside mt-2">
-        <li>HTML, CSS, JavaScript</li>
-        <li>C#, ASP.NET</li>
-        <li>Python</li>
-        <li>Frontend Frameworks</li>
-        <li>Java</li>
-        <li>And many more...</li>
-      </ul>
-    </section>
+                <!-- Project 5 -->
+                <article class="card tilt">
+                    <div class="glow"></div>
+                    <div class="thumb"><span class="label">Next.js • Node • Vercel</span></div>
+                    <div class="content">
+                        <h3>Project Kickstart Factory</h3>
+                        <p>Pick a stack → get a zipped scaffold with linting, CI and sane defaults. One click, instant
+                            boilerplate, zero yak-shaving.</p>
+                        <div class="meta">
+                            <span class="old-badge">Role: full-stack</span>
+                        </div>
+                    </div>
+                </article>
 
-    <!-- Projects -->
-    <section id="projects" class="text-white rounded-lg p-6 space-y-4 text-center">
-      <h2 class="text-3xl font-semibold">Projects</h2>
-      <div>
-        <!-- Example Project Card -->
-        <div class="bg-gray-700 p-4 rounded-lg shadow-lg mx-auto">
-          <h3 class="text-xl font-semibold text-white">Project 1</h3>
-          <p class="mt-2 text-gray-300">Be the first!
-          </p>
-          <a href="https://www.linkedin.com/in/paulo-pontarolo-0464a3263/" class="mt-4 block button">Learn More</a>
-        </div>
+                <!-- Project 6 -->
+                <article class="card tilt">
+                    <div class="glow"></div>
+                    <div class="thumb"><span class="label">Laravel • MySQL • Livewire</span></div>
+                    <div class="content">
+                        <h3>Cashflow Mini POS</h3>
+                        <p>Products, clients, income/expenses, contracts & estimates, themed UI and tidy charts.
+                            Multi-tenant, no fiscal docs. Ships clean.</p>
+                        <div class="meta">
+                            <span class="old-badge">Role: full-stack</span>
+                        </div>
+                    </div>
+                </article>
 
-        <!-- Repeat this block for more projects -->
-      </div>
-    </section>
+            </div>
+        </section>
 
-    <!-- Contact -->
-    <section id="contact" class="py-10 px-4 space-y-4 rounded-lg text-center">
-      <h2 class="text-3xl font-semibold text-white">Contact</h2>
-      <p class="text-lg text-white">Let's connect! You can find me on:</p>
-      <div class="flex justify-center space-x-4 contact-buttons">
-        <a href="https://www.instagram.com/paulinhopontarolo" target="_blank"
-          class="button text-white px-4 py-2">Instagram</a>
-        <a href="https://github.com/phpont" target="_blank"
-          class="button text-white px-4 py-2">GitHub</a>
-        <a href="https://www.linkedin.com/in/paulo-pontarolo-0464a3263/" target="_blank"
-          class="button text-white px-4 py-2">LinkedIn</a>
-      </div>      
-  </main>
+        <div class="sep"></div>
 
-  <!-- Footer -->
-  <footer class="text-white py-4 text-center">
-    &copy; 2023 My Portfolio | Developed by Paulo Henrique Pontarolo
-  </footer>
+        <section id="about">
+            <h2>Mini‑Lore (aka About)</h2>
+            <p class="section-sub">Started breaking websites in my early teenage years. Now I break them on purpose and fix
+                them faster.</p>
+            <div class="timeline">
+                <div class="tl-item"><strong>2025</strong> — Freelancing, consulting, and vibing. Shipping end‑to‑end
+                    products for cool people.</div>
+                <div class="tl-item"><strong>2023‑2024</strong> — Developed some personal projects; set up CI/CD that actually
+                    CDs. Mentored devs without being weird about it.</div>
+                <div class="tl-item"><strong>Back then</strong> — Touched every stack under the sun. Became one with
+                    git. Discovered dark mode.</div>
+            </div>
+        </section>
 
+        <section id="contact">
+            <h2>Slide in the DMs (professionally)</h2>
+            <p class="section-sub">Prefer quick emails over slow meetings. Ping me and I’ll get back faster than your CI
+                pipeline.</p>
+            <div class="cta">
+                <a class="btn" href="mailto:paulohponta@gmail.com"><span class="dot"></span> paulohponta@gmail.com</a>
+                <a class="btn alt" href="#guestbook"><span class="dot"></span> Sign my Guestbook</a>
+            </div>
+            <p class="muted" id="counter">Visitor #000001</p>
+        </section>
+    </main>
+
+    <footer>
+        <div>made with pure hatred, and way too much caffeine. © <span id="year"></span> Paulo.</div>
+    </footer>
+
+    <a href="#home" class="topbtn" title="Back to top">↑ Top</a>
+
+    <dialog id="gb">
+        <form method="dialog">
+            <h3>Guestbook</h3>
+            <p class="muted">Shoot me a note — the classic way. Your email client will pop open.</p>
+            <div class="cta" style="margin-top:10px">
+                <a class="btn" href="mailto:paulohponta@gmail.com?subject=Guestbook&body=Love%20the%20vibes!%20"><span
+                        class="dot"></span> Write email</a>
+                <button class="x">Close</button>
+            </div>
+        </form>
+    </dialog>
+
+    <noscript>
+        <div style="padding:12px;margin:12px;border:1px dashed #34405a;background:#0c111a;color:#d4defa">This site uses
+            a sprinkle of JavaScript for effects. It still looks cool without it, promise.</div>
+    </noscript>
+
+    <script>
+        (function () {
+            const k = 'pp_visit_count';
+            let n = parseInt(localStorage.getItem(k) || '0', 10) + 1;
+            localStorage.setItem(k, String(n));
+            const pad = (x) => x.toString().padStart(6, '0');
+            const el = document.getElementById('counter');
+            if (el) el.textContent = 'Visitor #' + pad(n);
+        })();
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        document.querySelectorAll('.tilt').forEach(card => {
+            const strength = 10;
+            card.addEventListener('mousemove', (e) => {
+                const r = card.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width - .5;
+                const py = (e.clientY - r.top) / r.height - .5;
+                card.style.transform = `rotateX(${(-py * strength)}deg) rotateY(${(px * strength)}deg) translateY(-2px)`;
+            });
+            card.addEventListener('mouseleave', () => { card.style.transform = 'translateY(0)'; });
+        });
+
+        const email = 'paulohponta@gmail.com';
+        document.getElementById('copyMail').addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(email); alert('Email copied: ' + email); } catch { prompt('Copy manually:', email); }
+        });
+
+        const gb = document.getElementById('gb');
+        document.querySelectorAll('a[href="#guestbook"]').forEach(a => a.addEventListener('click', (e) => { e.preventDefault(); gb.showModal(); }))
+
+        // Little homepage glitch pulse
+        setInterval(() => {
+            document.querySelectorAll('.glitch .big').forEach(el => {
+                el.classList.toggle('jitter');
+                setTimeout(() => el.classList.toggle('jitter'), 400);
+            })
+        }, 3500);
+    </script>
 </body>
 
 </html>
