@@ -107,7 +107,8 @@
             position: relative;
             z-index: 41;
         }
-        #gb > form > div > button {
+
+        #gb>form>div>button {
             font: 15px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
             color: #ffff;
             --ring: var(--neon);
@@ -125,11 +126,13 @@
             transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
             will-change: transform;
         }
-         #gb > form > div > button:hover {
+
+        #gb>form>div>button:hover {
             border-color: var(--ring);
             transform: translateY(-1.5px) scale(1.01);
             box-shadow: 0 0 20px color-mix(in oklab, var(--ring) 30%, transparent);
-         }
+        }
+
         body {
             margin: 0;
             font: 15px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -173,7 +176,6 @@
         .wrap {
             max-width: 1080px;
             margin: 0 auto;
-            padding: 24px
         }
 
         /* NAV */
@@ -751,6 +753,275 @@
                 padding: 8px 10px
             }
         }
+
+
+        /* iOS não inflar fonte sozinho */
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* usa as safe-areas do notch no topo/rodapé */
+        @supports (padding:max(0px)) {
+            body {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+            }
+
+            .nav {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+            }
+
+            footer {
+                padding-bottom: calc(24px + env(safe-area-inset-bottom));
+            }
+        }
+
+        /* HERO, título e sub com escala agressiva + melhor quebra */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                min-height: auto;
+                padding: 20px 0 6px;
+            }
+
+            .glitch {
+                max-width: 100%;
+                line-height: 1.05;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrap {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .badge {
+                font-size: 11px;
+                padding: 3px 8px;
+            }
+
+            .glitch .big {
+                /* menor, mas ainda imponente */
+                font-size: clamp(22px, 10.5vw, 36px);
+                margin-bottom: 6px;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+
+            .glitch .sub {
+                font-size: clamp(13px, 4.2vw, 16px);
+                color: var(--muted);
+                margin-top: 2px;
+            }
+
+            /* CTA empilhada e cheia */
+            .cta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 14px;
+            }
+
+            /* terminal ocupa largura total e fonte reduzida */
+            .terminal {
+                max-width: none;
+            }
+
+            .terminal pre {
+                font-size: 12.5px;
+                line-height: 1.45;
+            }
+
+            /* grade = 1 coluna e thumbs menores */
+            .grid {
+                grid-template-columns: 1fr !important;
+                gap: 14px;
+            }
+
+            .thumb {
+                height: 120px;
+            }
+
+            /* timeline mais compacta */
+            .timeline {
+                padding-left: 14px;
+            }
+
+            .timeline::before {
+                left: 6px;
+            }
+
+            .tl-item {
+                margin: 8px 0 12px;
+                padding-left: 12px;
+            }
+
+            /* tags menores com melhor quebra */
+            .tagwall {
+                gap: 8px 6px;
+            }
+
+            .tag {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            /* headings um tico menores */
+            h2 {
+                font-size: clamp(18px, 5.5vw, 22px);
+            }
+
+            /* separadores com mais ar */
+            .sep {
+                margin: 20px 0;
+            }
+
+            section {
+                padding-block: 28px;
+            }
+        }
+
+        /* Desliga hovers/tilt no touch (evita “travadinhas”) */
+        @media (hover:none),
+        (pointer:coarse) {
+            .btn:hover {
+                transform: none;
+                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
+            }
+
+            .card:hover {
+                transform: none;
+            }
+        }
+
+        /* Menos movimento se o usuário pediu */
+        @media (prefers-reduced-motion:reduce) {
+            .jitter {
+                animation: none !important;
+            }
+
+            .tag::after {
+                animation: none !important;
+            }
+
+            .btn,
+            .card {
+                transition: none !important;
+            }
+        }
+
+        /* Evita qualquer estouro lateral em imagens/mídias */
+        img,
+        video,
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===== MOBILE QUERIES ===== */
+
+        /* tablets/phones: título cabe sem esmagar */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                min-height: auto;
+            }
+
+            .glitch {
+                max-width: 100%;
+                line-height: 1.06;
+            }
+
+            .glitch .big {
+                font-size: clamp(28px, 8.5vw, 44px);
+                word-break: break-word;
+                overflow-wrap: anywhere;
+            }
+
+            .glitch .sub {
+                font-size: clamp(14px, 3.8vw, 18px);
+            }
+        }
+
+        /* telefones comuns (≤480px) */
+        @media (max-width: 480px) {
+
+            /* título ainda grande e chamativo, porém seguro */
+            .glitch .big {
+                font-size: clamp(24px, 10.2vw, 36px);
+                margin-bottom: 6px;
+            }
+
+            .glitch .sub {
+                font-size: clamp(13px, 4.2vw, 16px);
+            }
+
+            /* terminal encolhe para caber e centraliza */
+            .terminal {
+                width: calc(100vw - 32px);
+                /* respeita as bordas da tela */
+                max-width: 560px;
+                margin-inline: auto;
+            }
+
+            .terminal pre {
+                font-size: 12.5px;
+                line-height: 1.45;
+            }
+
+            /* botões se adaptam ao viewport sem ocupar 100% */
+            .cta {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+                justify-items: center;
+            }
+
+            .btn {
+                width: auto;
+                /* deixa o botão no tamanho do conteúdo */
+                max-width: 100%;
+                /* evita overflow */
+                justify-content: center;
+                padding-inline: 14px;
+            }
+
+            .cta .btn:nth-child(3) {
+                grid-column: 1 / -1;
+                /* 3º botão pega a linha toda (mas largura auto) */
+            }
+        }
+
+        /* telinhas muito estreitas (≤390px, ex.: iPhone 12/13 mini) */
+        @media (max-width: 390px) {
+            .glitch .big {
+                font-size: clamp(22px, 11.5vw, 32px);
+            }
+
+            .terminal {
+                width: calc(100vw - 24px);
+            }
+
+            .cta {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                width: auto;
+                margin-inline: auto;
+            }
+
+            /* centraliza, sem 100% */
+        }
     </style>
 </head>
 
@@ -862,7 +1133,8 @@
                     <div class="thumb"><span class="label">C# • WinUI • AHK</span></div>
                     <div class="content">
                         <h3>Macro Maestro</h3>
-                        <p>Record-and-replay with pixel triggers, cooldowns, and per-game profiles. Built for grindy runs.</p>
+                        <p>Record-and-replay with pixel triggers, cooldowns, and per-game profiles. Built for grindy
+                            runs.</p>
                         <div class="meta">
                             <span class="old-badge">Role: backend + desktop</span>
                         </div>
@@ -918,12 +1190,14 @@
 
         <section style="margin-top: -50px;" id="about">
             <h2>Mini‑Lore (aka About)</h2>
-            <p class="section-sub">Started breaking websites in my early teenage years. Now I break them on purpose and fix
+            <p class="section-sub">Started breaking websites in my early teenage years. Now I break them on purpose and
+                fix
                 them faster.</p>
             <div class="timeline">
                 <div class="tl-item"><strong>2025</strong> — Freelancing, consulting, and vibing. Shipping end‑to‑end
                     products for cool people.</div>
-                <div class="tl-item"><strong>2023‑2024</strong> — Developed some personal projects; set up CI/CD that actually
+                <div class="tl-item"><strong>2023‑2024</strong> — Developed some personal projects; set up CI/CD that
+                    actually
                     CDs. Mentored devs without being weird about it.</div>
                 <div class="tl-item"><strong>Back then</strong> — Touched every stack under the sun. Became one with
                     git. Discovered dark mode.</div>
