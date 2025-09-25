@@ -7,12 +7,12 @@
     <link type="image/png" sizes="32x32" rel="icon" href="icons8-coffee-ios-17-filled-32.png">
     <link type="image/png" sizes="96x96" rel="icon" href="icons8-coffee-ios-17-filled-96.png">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Paulo // Full‑Stack Chaos Wizard</title>
+    <title>Paulo // Full‑Stack Dev</title>
     <meta name="description"
         content="Dark old‑web themed portfolio with modern effects. Full‑stack developer who can ship in any stack." />
     <meta name="theme-color" content="#0b0e12" />
 
-    <!-- SEO / Social (no external assets used) -->
+
     <meta property="og:title" content="Paulo // Full‑Stack Chaos Wizard">
     <meta property="og:description" content="I build cool stuff fast. Any stack, any language.">
     <meta property="og:type" content="website">
@@ -20,23 +20,14 @@
     <style>
         :root {
             --bg: #0b0e12;
-            /* deep void */
             --bg-2: #0f131a;
-            /* panel */
             --ink: #d6e2ff;
-            /* readable text */
             --muted: #a0a8bf;
-            /* secondary */
             --edge: #10131a;
-            /* card edge */
             --neon: #00ffc6;
-            /* mint neon */
             --mag: #ff00b3;
-            /* magenta neon */
             --acid: #8aff00;
-            /* slime neon */
             --warn: #ffea00;
-            /* cyber yellow */
             --shadow: rgba(0, 0, 0, .55);
         }
 
@@ -53,7 +44,6 @@
             scroll-behavior: smooth
         }
 
-        /* Garanta que o overlay global fique “lá no fundo” */
         body {
             position: relative;
         }
@@ -63,7 +53,6 @@
             z-index: 0;
         }
 
-        /* E o conteúdo por cima do overlay */
         header,
         main,
         footer,
@@ -72,28 +61,23 @@
             z-index: 1;
         }
 
-        /* mais previsível que margin “solta” (evita colapso esquisito com vizinhos) */
         section {
             padding-top: 52px;
             margin: 0;
         }
 
-        /* evita que sombras grandes criem barras aparentes nas bordas do container */
         .wrap {
             position: relative;
             z-index: 1;
             overflow: visible;
         }
 
-        /* o separador continua fininho sem parecer uma faixa */
         .sep {
             height: 1px;
             background: linear-gradient(90deg, transparent, #1b2230, transparent);
             margin: 24px 0;
         }
 
-
-        /* Evita bleed/blend estranho dentro das seções quando há mix-blend/shadows */
         section,
         .grid,
         .card,
@@ -101,7 +85,6 @@
             isolation: isolate;
         }
 
-        /* O ticker às vezes ficava “abaixo” do sticky com blur */
         .nav {
             z-index: 40;
         }
@@ -148,7 +131,6 @@
             cursor: crosshair;
         }
 
-        /* CRT Scanlines + Vignette */
         body::before {
             content: "";
             position: fixed;
@@ -181,7 +163,6 @@
             margin: 0 auto;
         }
 
-        /* NAV */
         .nav {
             position: sticky;
             top: 0;
@@ -240,7 +221,6 @@
             box-shadow: 0 0 16px rgba(0, 255, 198, .25)
         }
 
-        /* Old‑web Marquee */
         .ticker {
             display: block;
             margin-top: 12px;
@@ -289,7 +269,6 @@
             color: var(--muted);
         }
 
-        /* glitch layers */
         .glitch span[data-text] {
             position: relative;
             display: block;
@@ -386,7 +365,6 @@
             --ring: var(--mag);
         }
 
-        /* remova as outras definições de .terminal e fique com esta */
         .terminal {
             border: 1px solid #153022;
             border-radius: 16px;
@@ -466,7 +444,6 @@
             }
         }
 
-        /* PROJECTS */
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -569,7 +546,6 @@
             gap: 8px
         }
 
-        /* ABOUT (pseudo-terminal) */
         .terminal {
             border: 1px solid #153022;
             border-radius: 16px;
@@ -623,7 +599,6 @@
             }
         }
 
-        /* TIMELINE */
         .timeline {
             position: relative;
             padding-left: 22px
@@ -657,7 +632,6 @@
             box-shadow: 0 0 12px rgba(0, 255, 198, .6)
         }
 
-        /* FOOTER */
         footer {
             padding: 24px;
             border-top: 1px solid #171c27;
@@ -666,7 +640,6 @@
             background: #0b0f15
         }
 
-        /* Utility */
         .muted {
             color: var(--muted)
         }
@@ -690,7 +663,6 @@
             background: #0d1220
         }
 
-        /* Guestbook pop */
         dialog {
             border: 1px solid #26314b;
             border-radius: 16px;
@@ -711,7 +683,6 @@
             padding: 8px 12px
         }
 
-        /* Konami Y2K mode */
         body.y2k {
             filter: contrast(1.1) saturate(1.1)
         }
@@ -725,7 +696,6 @@
             image-rendering: pixelated
         }
 
-        /* Back to top */
         .topbtn {
             position: fixed;
             right: 18px;
@@ -746,7 +716,6 @@
             border-color: var(--neon)
         }
 
-        /* Responsive niceties */
         @media (max-width:520px) {
             .nav ul {
                 gap: 10px
@@ -757,13 +726,10 @@
             }
         }
 
-
-        /* iOS não inflar fonte sozinho */
         html {
             -webkit-text-size-adjust: 100%;
         }
 
-        /* usa as safe-areas do notch no topo/rodapé */
         @supports (padding:max(0px)) {
             body {
                 padding-left: max(0px, env(safe-area-inset-left));
@@ -780,7 +746,6 @@
             }
         }
 
-        /* HERO, título e sub com escala agressiva + melhor quebra */
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -807,7 +772,6 @@
             }
 
             .glitch .big {
-                /* menor, mas ainda imponente */
                 font-size: clamp(22px, 10.5vw, 36px);
                 margin-bottom: 6px;
                 overflow-wrap: anywhere;
@@ -820,7 +784,6 @@
                 margin-top: 2px;
             }
 
-            /* CTA empilhada e cheia */
             .cta {
                 flex-direction: column;
                 gap: 10px;
@@ -832,7 +795,6 @@
                 padding: 12px 14px;
             }
 
-            /* terminal ocupa largura total e fonte reduzida */
             .terminal {
                 max-width: none;
             }
@@ -842,7 +804,6 @@
                 line-height: 1.45;
             }
 
-            /* grade = 1 coluna e thumbs menores */
             .grid {
                 grid-template-columns: 1fr !important;
                 gap: 14px;
@@ -852,7 +813,6 @@
                 height: 120px;
             }
 
-            /* timeline mais compacta */
             .timeline {
                 padding-left: 14px;
             }
@@ -866,7 +826,6 @@
                 padding-left: 12px;
             }
 
-            /* tags menores com melhor quebra */
             .tagwall {
                 gap: 8px 6px;
             }
@@ -876,12 +835,10 @@
                 padding: 6px 10px;
             }
 
-            /* headings um tico menores */
             h2 {
                 font-size: clamp(18px, 5.5vw, 22px);
             }
 
-            /* separadores com mais ar */
             .sep {
                 margin: 20px 0;
             }
@@ -891,7 +848,6 @@
             }
         }
 
-        /* Desliga hovers/tilt no touch (evita “travadinhas”) */
         @media (hover:none),
         (pointer:coarse) {
             .btn:hover {
@@ -904,7 +860,6 @@
             }
         }
 
-        /* Menos movimento se o usuário pediu */
         @media (prefers-reduced-motion:reduce) {
             .jitter {
                 animation: none !important;
@@ -920,7 +875,6 @@
             }
         }
 
-        /* Evita qualquer estouro lateral em imagens/mídias */
         img,
         video,
         canvas {
@@ -929,9 +883,6 @@
             display: block;
         }
 
-        /* ===== MOBILE QUERIES ===== */
-
-        /* tablets/phones: título cabe sem esmagar */
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -955,10 +906,7 @@
             }
         }
 
-        /* telefones comuns (≤480px) */
         @media (max-width: 480px) {
-
-            /* título ainda grande e chamativo, porém seguro */
             .glitch .big {
                 font-size: clamp(24px, 10.2vw, 36px);
                 margin-bottom: 6px;
@@ -968,10 +916,8 @@
                 font-size: clamp(13px, 4.2vw, 16px);
             }
 
-            /* terminal encolhe para caber e centraliza */
             .terminal {
                 width: calc(100vw - 32px);
-                /* respeita as bordas da tela */
                 max-width: 560px;
                 margin-inline: auto;
             }
@@ -981,7 +927,6 @@
                 line-height: 1.45;
             }
 
-            /* botões se adaptam ao viewport sem ocupar 100% */
             .cta {
                 display: grid;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -991,20 +936,16 @@
 
             .btn {
                 width: auto;
-                /* deixa o botão no tamanho do conteúdo */
                 max-width: 100%;
-                /* evita overflow */
                 justify-content: center;
                 padding-inline: 14px;
             }
 
             .cta .btn:nth-child(3) {
                 grid-column: 1 / -1;
-                /* 3º botão pega a linha toda (mas largura auto) */
             }
         }
 
-        /* telinhas muito estreitas (≤390px, ex.: iPhone 12/13 mini) */
         @media (max-width: 390px) {
             .glitch .big {
                 font-size: clamp(22px, 11.5vw, 32px);
@@ -1022,8 +963,6 @@
                 width: auto;
                 margin-inline: auto;
             }
-
-            /* centraliza, sem 100% */
         }
     </style>
 </head>
@@ -1103,7 +1042,7 @@
             <h2>Projects that go hard</h2>
             <p class="section-sub">A few bangers. Most repos are private — ask nicely and I might flex.</p>
             <div class="grid">
-                <!-- Project -->
+
                 <article class="card tilt">
                     <div class="glow"></div>
                     <div class="thumb"><span class="label">PHP • MySQL • Vanilla JS</span></div>
@@ -1117,7 +1056,7 @@
                     </div>
                 </article>
 
-                <!-- Project 2 -->
+
                 <article class="card tilt">
                     <div class="glow"></div>
                     <div class="thumb"><span class="label">C++ • WinAPI</span></div>
@@ -1130,7 +1069,7 @@
                     </div>
                 </article>
 
-                <!-- Project 3 -->
+
                 <article class="card tilt">
                     <div class="glow"></div>
                     <div class="thumb"><span class="label">C# • WinUI • AHK</span></div>
@@ -1144,7 +1083,7 @@
                     </div>
                 </article>
 
-                <!-- Project 4 -->
+
                 <article class="card tilt">
                     <div class="glow"></div>
                     <div class="thumb"><span class="label">Python • ADB • Automation</span></div>
@@ -1158,7 +1097,7 @@
                     </div>
                 </article>
 
-                <!-- Project 5 -->
+
                 <article class="card tilt">
                     <div class="glow"></div>
                     <div class="thumb"><span class="label">Next.js • Node • Vercel</span></div>
@@ -1172,7 +1111,7 @@
                     </div>
                 </article>
 
-                <!-- Project 6 -->
+
                 <article class="card tilt">
                     <div class="glow"></div>
                     <div class="thumb"><span class="label">Laravel • MySQL • Livewire</span></div>
@@ -1273,7 +1212,6 @@
         const gb = document.getElementById('gb');
         document.querySelectorAll('a[href="#guestbook"]').forEach(a => a.addEventListener('click', (e) => { e.preventDefault(); gb.showModal(); }))
 
-        // Little homepage glitch pulse
         setInterval(() => {
             document.querySelectorAll('.glitch .big').forEach(el => {
                 el.classList.toggle('jitter');
