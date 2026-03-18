@@ -1,684 +1,1166 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Paulo Pontarolo – Full-Stack Developer. TypeScript, Next.js, Node, Postgres, Rust. Blumenau, BR.">
-<meta name="author" content="Paulo Pontarolo">
-<meta property="og:title" content="phpont – Full-Stack Developer">
-<meta property="og:description" content="Portfolio de Paulo Pontarolo. TypeScript, Next.js, Rust.">
-<meta property="og:type" content="website">
-<title>Paulo Pontarolo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Paulo Pontarolo – Full-Stack Developer. TypeScript, Next.js, Node, Postgres, Rust. Blumenau, BR.">
+  <meta name="author" content="Paulo Pontarolo">
+  <meta property="og:title" content="phpont – Full-Stack Developer">
+  <meta property="og:description" content="Portfolio de Paulo Pontarolo. TypeScript, Next.js, Rust.">
+  <meta property="og:type" content="website">
+  <title>Paulo Pontarolo</title>
 
-<style>
-/* ── FONTS ─────────────────────────────────────────────────────── */
-@font-face { font-family:'IBM_VGA_8x14'; src:url('assets/fonts/Web437_IBM_VGA_8x14.woff') format('woff'); }
-@font-face { font-family:'IBM_VGA_8x16'; src:url('assets/fonts/WebPlus_IBM_VGA_8x16.woff') format('woff'); }
-@font-face { font-family:'HP_100LX';     src:url('assets/fonts/WebPlus_HP_100LX_6x8.woff') format('woff'); }
-@font-face { font-family:'IBM_VGA_9x8';  src:url('assets/fonts/Web437_IBM_VGA_9x8.woff') format('woff'); }
-@font-face { font-family:'ToshibaSat';   src:url('assets/fonts/WebPlus_ToshibaSat_8x14.woff') format('woff'); }
-@font-face { font-family:'IBM_CGAthin';  src:url('assets/fonts/WebPlus_IBM_CGAthin.woff') format('woff'); }
+  <style>
+    /* ── FONTS ─────────────────────────────────────────────────────── */
+    @font-face {
+      font-family: 'IBM_VGA_8x14';
+      src: url('assets/fonts/Web437_IBM_VGA_8x14.woff') format('woff');
+    }
 
-/* ── TOKENS ─────────────────────────────────────────────────────── */
-:root {
-  --bg:          #0a0a08;
-  --bg-panel:    #0f0e0b;
-  --text:        #d4c5a0;
-  --text-dim:    #7a7058;
-  --accent:      #ffb833;
-  --accent-glow: #ff9500;
-  --green:       #33ff66;
-  --green-dim:   #1a8a3a;
-  --scanline:    rgba(0,0,0,0.15);
-  --border:      #3a3420;
-  --font-ascii:  'IBM_VGA_8x14', monospace;
-  --font-head:   'IBM_VGA_8x16', monospace;
-  --font-body:   'HP_100LX', monospace;
-  --font-term:   'IBM_VGA_9x8', monospace;
-  --font-label:  'ToshibaSat', monospace;
-  --font-deco:   'IBM_CGAthin', monospace;
-}
+    @font-face {
+      font-family: 'IBM_VGA_8x16';
+      src: url('assets/fonts/WebPlus_IBM_VGA_8x16.woff') format('woff');
+    }
 
-/* ── RESET ──────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+    @font-face {
+      font-family: 'HP_100LX';
+      src: url('assets/fonts/WebPlus_HP_100LX_6x8.woff') format('woff');
+    }
 
-/* ── BODY + CRT EFFECTS ─────────────────────────────────────────── */
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
-  animation: flicker 8s infinite;
-  position: relative;
-}
+    @font-face {
+      font-family: 'IBM_VGA_9x8';
+      src: url('assets/fonts/Web437_IBM_VGA_9x8.woff') format('woff');
+    }
 
-/* Scanlines */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 2px,
-    var(--scanline) 2px,
-    var(--scanline) 4px
-  );
-  pointer-events: none;
-  z-index: 9998;
-}
+    @font-face {
+      font-family: 'ToshibaSat';
+      src: url('assets/fonts/WebPlus_ToshibaSat_8x14.woff') format('woff');
+    }
 
-/* Vignette */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at center,
-    transparent 60%,
-    rgba(0,0,0,0.55) 100%
-  );
-  pointer-events: none;
-  z-index: 9997;
-}
+    @font-face {
+      font-family: 'IBM_CGAthin';
+      src: url('assets/fonts/WebPlus_IBM_CGAthin.woff') format('woff');
+    }
 
-@keyframes flicker {
-  0%,100% { opacity: 1.0; }
-  92%      { opacity: 1.0; }
-  93%      { opacity: 0.97; }
-  94%      { opacity: 1.0; }
-  96%      { opacity: 0.98; }
-  97%      { opacity: 1.0; }
-}
+    /* ── TOKENS ─────────────────────────────────────────────────────── */
+    :root {
+      --bg: #0a0a08;
+      --bg-panel: #0f0e0b;
+      --text: #d4c5a0;
+      --text-dim: #7a7058;
+      --accent: #ffb833;
+      --accent-glow: #ff9500;
+      --green: #33ff66;
+      --green-dim: #1a8a3a;
+      --scanline: rgba(0, 0, 0, 0.15);
+      --border: #3a3420;
+      --font-ascii: 'IBM_VGA_8x14', monospace;
+      --font-head: 'IBM_VGA_8x16', monospace;
+      --font-body: 'HP_100LX', monospace;
+      --font-term: 'IBM_VGA_9x8', monospace;
+      --font-label: 'ToshibaSat', monospace;
+      --font-deco: 'IBM_CGAthin', monospace;
+    }
 
-@media (prefers-reduced-motion: reduce) {
-  body { animation: none; }
-  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
-}
+    /* ── RESET ──────────────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* ── LAYOUT ─────────────────────────────────────────────────────── */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 1.2rem;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* ── CRT TURN-ON OVERLAY ────────────────────────────────────────── */
-#crt-turnon {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 10001;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-#crt-turnon .crt-line {
-  width: 100%;
-  height: 2px;
-  background: rgba(200,200,200,0.9);
-  box-shadow: 0 0 30px 10px rgba(200,200,200,0.4);
-  animation: crt-expand 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-@keyframes crt-expand {
-  0%   { height: 2px; opacity: 1; }
-  50%  { height: 2px; opacity: 1; }
-  70%  { height: 100vh; opacity: 0.8; }
-  100% { height: 100vh; opacity: 0; }
-}
+    /* ── BODY + CRT EFFECTS ─────────────────────────────────────────── */
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      animation: flicker 8s infinite;
+      position: relative;
+    }
 
-/* ── BOOT OVERLAY ───────────────────────────────────────────────── */
-#boot-overlay {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 10000;
-  font-family: var(--font-term);
-  color: var(--green);
-  overflow: hidden;
-  transition: opacity 0.5s ease;
-}
-#boot-overlay.fade-out { opacity: 0; pointer-events: none; }
+    /* Scanlines */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(to bottom,
+          transparent,
+          transparent 2px,
+          var(--scanline) 2px,
+          var(--scanline) 4px);
+      pointer-events: none;
+      z-index: 9998;
+    }
 
-#boot-screen {
-  padding: 2rem 2.5rem;
-  max-width: 100%;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-#boot-screen.visible { opacity: 1; }
+    /* Vignette */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center,
+          transparent 60%,
+          rgba(0, 0, 0, 0.55) 100%);
+      pointer-events: none;
+      z-index: 9997;
+    }
 
-#boot-screen .boot-line {
-  display: block;
-  margin: 0;
-  white-space: pre;
-  font-size: clamp(11px, 1.6vw, 14px);
-  line-height: 1.6;
-  min-height: 1.4em;
-}
-.boot-ok     { color: var(--green); }
-.boot-warn   { color: var(--accent); }
-.boot-info   { color: var(--text-dim); }
-.boot-white  { color: #ccc; }
-.boot-accent { color: var(--accent); }
+    @keyframes flicker {
 
-#boot-splash {
-  margin-top: 0.8rem;
-  font-family: var(--font-deco);
-  font-size: clamp(8px, 1.2vw, 12px);
-  line-height: 1.15;
-  color: var(--accent);
-  text-shadow: 0 0 8px var(--accent-glow);
-  white-space: pre;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-#boot-splash.visible { opacity: 1; }
+      0%,
+      100% {
+        opacity: 1.0;
+      }
 
-#boot-bar {
-  margin-top: 0.5rem;
-  font-size: clamp(11px, 1.6vw, 14px);
-  color: var(--text-dim);
-  white-space: pre;
-  line-height: 1.6;
-}
-#boot-bar .bar-fill { color: var(--green); }
-#boot-bar .bar-pct  { color: var(--accent); }
+      92% {
+        opacity: 1.0;
+      }
 
-#boot-prompt {
-  margin-top: 0.6rem;
-  font-size: clamp(11px, 1.6vw, 14px);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-#boot-prompt.visible { opacity: 1; }
+      93% {
+        opacity: 0.97;
+      }
 
-#boot-cursor { animation: blink 0.7s step-end infinite; }
-@keyframes blink { 50% { opacity: 0; } }
+      94% {
+        opacity: 1.0;
+      }
 
-/* ── HERO ───────────────────────────────────────────────────────── */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem 0;
-  position: relative;
-}
+      96% {
+        opacity: 0.98;
+      }
 
-.hero-pre-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  max-width: 100vw;
-  padding: 0 0.5rem;
-}
-.hero-pre-wrap .scroll-hint {
-  display: none;
-  font-family: var(--font-term);
-  font-size: 11px;
-  color: var(--text-dim);
-  margin-bottom: 0.3rem;
-}
+      97% {
+        opacity: 1.0;
+      }
+    }
 
-.ascii-art {
-  display: inline-block;
-  font-family: var(--font-ascii);
-  font-size: clamp(0.35rem, 0.82vw, 0.95rem);
-  line-height: 1.15;
-  color: var(--accent);
-  text-shadow:
-    0 0 4px var(--accent-glow),
-    0 0 12px rgba(255,149,0,0.3);
-  white-space: pre;
-  animation: glow-pulse 3s ease-in-out infinite;
-  cursor: default;
-  transition: all 0.05s;
-  user-select: none;
-}
+    @media (prefers-reduced-motion: reduce) {
+      body {
+        animation: none;
+      }
 
-.ascii-art:hover {
-  animation: glitch 0.3s steps(2) forwards, glow-pulse 3s ease-in-out infinite;
-}
+      * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
 
-@keyframes glow-pulse {
-  0%,100% { text-shadow: 0 0 4px var(--accent-glow), 0 0 12px rgba(255,149,0,0.3); }
-  50%     { text-shadow: 0 0 8px var(--accent-glow), 0 0 22px rgba(255,149,0,0.5), 0 0 40px rgba(255,184,51,0.2); }
-}
+    /* ── SCROLLBAR ─────────────────────────────────────────────────── */
+    :root {
+      --scrollbar-size: 12px;
+      --scrollbar-track: #0f0e0b;
+      --scrollbar-track-edge: #1a160f;
+      --scrollbar-thumb-top: #5f4310;
+      --scrollbar-thumb-mid: #ffb833;
+      --scrollbar-thumb-bottom: #8a5c12;
+      --scrollbar-thumb-hover-top: #7a5312;
+      --scrollbar-thumb-hover-mid: #ffd075;
+      --scrollbar-thumb-hover-bottom: #ffb833;
+      --scrollbar-border: #2c2415;
+    }
 
-@keyframes glitch {
-  0%  { clip-path: inset(0 0 90% 0); transform: translate(-3px, 0); color: var(--green); }
-  20% { clip-path: inset(40% 0 40% 0); transform: translate(3px, 0); color: var(--accent); }
-  40% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 0); color: var(--green); }
-  60% { clip-path: inset(20% 0 60% 0); transform: translate(2px, 0); color: var(--accent); }
-  80% { clip-path: inset(60% 0 20% 0); transform: translate(0, 0); color: var(--accent); }
-  100%{ clip-path: inset(0 0 0 0); transform: translate(0, 0); color: var(--accent); }
-}
+    /* padrão */
+    html {
+      scrollbar-gutter: stable;
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb-mid) var(--scrollbar-track);
+    }
 
-.hero-subtitle {
-  font-family: var(--font-label);
-  font-size: clamp(14px, 2.2vw, 20px);
-  color: var(--text);
-  margin-top: 2rem;
-  letter-spacing: 0.12em;
-}
-.hero-subtitle span { color: var(--text-dim); }
+    /* containers internos com scroll */
+    .hero-pre-wrap {
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb-mid) transparent;
+    }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-term);
-  font-size: clamp(10px, 1.3vw, 12px);
-  color: var(--text-dim);
-  text-align: center;
-  animation: scroll-bob 2s ease-in-out infinite;
-}
-.scroll-indicator .arrow {
-  display: block;
-  color: var(--green);
-  font-size: 1.4em;
-  margin-top: 0.3rem;
-}
-@keyframes scroll-bob {
-  0%,100% { transform: translateX(-50%) translateY(0); }
-  50%     { transform: translateX(-50%) translateY(6px); }
-}
+    /* Blink / WebKit */
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar,
+    .hero-pre-wrap::-webkit-scrollbar {
+      width: var(--scrollbar-size);
+      height: var(--scrollbar-size);
+    }
 
-/* ── INLINE NAV (inside content) ─────────────────────────────────── */
-.inline-nav {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  padding: 1.2rem 0;
-  font-family: var(--font-head);
-  font-size: clamp(10px, 1.5vw, 13px);
-  border-bottom: 1px solid var(--border);
-}
-.inline-nav a {
-  color: var(--text);
-  text-decoration: none;
-  padding: 0.1rem 0.3rem;
-  border: 1px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
-  white-space: nowrap;
-}
-.inline-nav a::before { content: '['; color: var(--text-dim); }
-.inline-nav a::after  { content: ']'; color: var(--text-dim); }
-.inline-nav a:hover {
-  color: var(--green);
-  border-color: var(--green-dim);
-  text-shadow: 0 0 6px var(--green);
-}
-.inline-nav a:hover::before { content: '>'; color: var(--green); }
-.inline-nav a:hover::after  { content: '<'; color: var(--green); }
+    html::-webkit-scrollbar-track,
+    body::-webkit-scrollbar-track,
+    .hero-pre-wrap::-webkit-scrollbar-track {
+      background:
+        linear-gradient(180deg,
+          var(--scrollbar-track-edge) 0%,
+          var(--scrollbar-track) 18%,
+          var(--scrollbar-track) 82%,
+          var(--scrollbar-track-edge) 100%);
+      border-left: 1px solid var(--scrollbar-border);
+      box-shadow: inset 0 0 0 1px rgba(255, 184, 51, 0.04);
+    }
 
-/* ── SECTIONS ───────────────────────────────────────────────────── */
-section {
-  padding: 3rem 0 2rem;
-  border-top: 1px solid var(--border);
-}
-#hero { border-top: none; }
+    html::-webkit-scrollbar-thumb,
+    body::-webkit-scrollbar-thumb,
+    .hero-pre-wrap::-webkit-scrollbar-thumb {
+      background:
+        linear-gradient(180deg,
+          var(--scrollbar-thumb-top) 0%,
+          var(--scrollbar-thumb-mid) 52%,
+          var(--scrollbar-thumb-bottom) 100%);
+      border: 2px solid var(--scrollbar-track);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 149, 0, 0.22),
+        0 0 8px rgba(255, 149, 0, 0.16);
+    }
 
-.section-prompt {
-  font-family: var(--font-term);
-  font-size: clamp(11px, 1.8vw, 14px);
-  color: var(--text-dim);
-  margin-bottom: 0.3rem;
-}
-.section-prompt .prompt-user { color: var(--green); }
-.section-prompt .prompt-dir  { color: var(--accent); }
-.section-prompt .prompt-cmd  { color: var(--text); }
+    html::-webkit-scrollbar-thumb:hover,
+    body::-webkit-scrollbar-thumb:hover,
+    .hero-pre-wrap::-webkit-scrollbar-thumb:hover {
+      background:
+        linear-gradient(180deg,
+          var(--scrollbar-thumb-hover-top) 0%,
+          var(--scrollbar-thumb-hover-mid) 52%,
+          var(--scrollbar-thumb-hover-bottom) 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 149, 0, 0.35),
+        0 0 12px rgba(255, 184, 51, 0.28);
+    }
 
-.section-title {
-  font-family: var(--font-head);
-  font-size: clamp(14px, 2vw, 18px);
-  color: var(--accent);
-  text-shadow: 0 0 6px var(--accent-glow);
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.section-title.visible { opacity: 1; }
+    html::-webkit-scrollbar-corner,
+    body::-webkit-scrollbar-corner,
+    .hero-pre-wrap::-webkit-scrollbar-corner {
+      background: var(--scrollbar-track);
+    }
 
-/* ── WHOAMI ─────────────────────────────────────────────────────── */
-.bbs-profile {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  padding: 1.2rem 1.5rem;
-  font-family: var(--font-term);
-  font-size: clamp(11px, 1.6vw, 13px);
-  line-height: 2;
-}
+    /* ── LAYOUT ─────────────────────────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.2rem;
+    }
 
-.bbs-row { display: flex; gap: 0; }
-.bbs-key {
-  color: var(--text-dim);
-  white-space: pre;
-  min-width: 14ch;
-}
-.bbs-sep { color: var(--text-dim); margin: 0 0.5rem; }
-.bbs-val { color: var(--text); }
-.bbs-val .hi { color: var(--accent); }
-.bbs-val .green { color: var(--green); }
+    /* ── CRT TURN-ON OVERLAY ────────────────────────────────────────── */
+    #crt-turnon {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
 
-.bbs-profile .bbs-top {
-  color: var(--text-dim);
-  font-family: var(--font-ascii);
-  margin-bottom: 0.5rem;
-  white-space: pre;
-  font-size: clamp(9px, 1.3vw, 11px);
-}
+    #crt-turnon .crt-line {
+      width: 100%;
+      height: 2px;
+      background: rgba(200, 200, 200, 0.9);
+      box-shadow: 0 0 30px 10px rgba(200, 200, 200, 0.4);
+      animation: crt-expand 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
 
-/* ── SKILLS ─────────────────────────────────────────────────────── */
-.ls-output {
-  font-family: var(--font-term);
-  font-size: clamp(11px, 1.6vw, 13px);
-  line-height: 1.8;
-}
+    @keyframes crt-expand {
+      0% {
+        height: 2px;
+        opacity: 1;
+      }
 
-.ls-total { color: var(--text-dim); margin-bottom: 0.5rem; }
+      50% {
+        height: 2px;
+        opacity: 1;
+      }
 
-.ls-group-header {
-  display: flex;
-  gap: 1rem;
-  color: var(--accent);
-  margin-top: 0.8rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.2rem;
-}
+      70% {
+        height: 100vh;
+        opacity: 0.8;
+      }
 
-.ls-row {
-  display: flex;
-  align-items: baseline;
-  gap: 0;
-  padding: 0.05rem 0;
-}
-.ls-perms { color: var(--text-dim); min-width: 12ch; }
-.ls-size  { color: var(--text-dim); min-width: 6ch; text-align: right; margin-right: 1ch; }
-.ls-name  { color: var(--green); }
-.ls-name.dir { color: var(--accent); font-weight: bold; }
-.ls-tag   { color: var(--text-dim); margin-left: 1rem; font-size: 0.9em; }
+      100% {
+        height: 100vh;
+        opacity: 0;
+      }
+    }
 
-/* ── PROJECTS ───────────────────────────────────────────────────── */
-.project-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  position: relative;
-  overflow: hidden;
-}
+    /* ── BOOT OVERLAY ───────────────────────────────────────────────── */
+    #boot-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 10000;
+      font-family: var(--font-term);
+      color: var(--green);
+      overflow: hidden;
+      transition: opacity 0.5s ease;
+    }
 
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--green-dim), transparent);
-}
+    #boot-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-.cat-header {
-  font-family: var(--font-term);
-  font-size: clamp(10px, 1.4vw, 12px);
-  color: var(--text-dim);
-  margin-bottom: 1rem;
-}
-.cat-header .green { color: var(--green); }
+    #boot-screen {
+      padding: 2rem 2.5rem;
+      max-width: 100%;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
 
-.proj-ascii {
-  font-family: var(--font-deco);
-  font-size: clamp(0.5rem, 1vw, 0.85rem);
-  color: var(--accent);
-  white-space: pre;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 6px var(--accent-glow);
-}
+    #boot-screen.visible {
+      opacity: 1;
+    }
 
-.proj-desc {
-  font-family: var(--font-body);
-  font-size: clamp(11px, 1.6vw, 13px);
-  color: var(--text);
-  margin-bottom: 1rem;
-  line-height: 1.7;
-}
+    #boot-screen .boot-line {
+      display: block;
+      margin: 0;
+      white-space: pre;
+      font-size: clamp(11px, 1.6vw, 14px);
+      line-height: 1.6;
+      min-height: 1.4em;
+    }
 
-.proj-features {
-  font-family: var(--font-term);
-  font-size: clamp(10px, 1.4vw, 12px);
-  color: var(--text);
-  margin-bottom: 1rem;
-  line-height: 1.8;
-}
-.feat-check { color: var(--green); }
+    .boot-ok {
+      color: var(--green);
+    }
 
-.proj-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  font-family: var(--font-label);
-  font-size: clamp(10px, 1.4vw, 12px);
-  color: var(--text-dim);
-  margin-bottom: 1rem;
-  border-top: 1px solid var(--border);
-  padding-top: 0.8rem;
-}
-.proj-meta .stack-item { color: var(--text); }
+    .boot-warn {
+      color: var(--accent);
+    }
 
-.proj-link {
-  font-family: var(--font-term);
-  font-size: clamp(11px, 1.6vw, 13px);
-  color: var(--green);
-  text-decoration: none;
-  border: 1px solid var(--green-dim);
-  padding: 0.2rem 0.6rem;
-  display: inline-block;
-  transition: all 0.15s;
-  text-shadow: 0 0 4px rgba(51,255,102,0.4);
-}
-.proj-link:hover {
-  background: var(--green-dim);
-  color: var(--bg);
-  text-shadow: none;
-  box-shadow: 0 0 8px var(--green);
-}
+    .boot-info {
+      color: var(--text-dim);
+    }
 
-.load-bar-wrap {
-  font-family: var(--font-term);
-  font-size: clamp(10px, 1.4vw, 12px);
-  color: var(--text-dim);
-  margin-bottom: 1rem;
-}
-.load-bar-track { display: inline-block; }
-.load-bar-fill  { color: var(--green); }
-.load-bar-empty { color: var(--text-dim); }
-.load-bar-pct   { color: var(--accent); margin-left: 0.5rem; }
+    .boot-white {
+      color: #ccc;
+    }
 
-/* ── HISTORY / TIMELINE ─────────────────────────────────────────── */
-.timeline {
-  font-family: var(--font-term);
-  font-size: clamp(11px, 1.6vw, 13px);
-  line-height: 1;
-  position: relative;
-}
+    .boot-accent {
+      color: var(--accent);
+    }
 
-.tl-item {
-  display: grid;
-  grid-template-columns: 8ch 2ch 1fr;
-  gap: 0.5rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--border);
-  align-items: start;
-}
-.tl-item:last-child { border-bottom: none; }
-.tl-year { color: var(--accent); font-family: var(--font-head); }
-.tl-sep  { color: var(--text-dim); text-align: center; }
-.tl-text { color: var(--text); line-height: 1.6; }
-.tl-text .tag {
-  color: var(--green);
-  font-size: 0.9em;
-  border: 1px solid var(--green-dim);
-  padding: 0 0.3rem;
-  margin-left: 0.4rem;
-  vertical-align: middle;
-  white-space: nowrap;
-}
+    #boot-splash {
+      margin-top: 0.8rem;
+      font-family: var(--font-deco);
+      font-size: clamp(8px, 1.2vw, 12px);
+      line-height: 1.15;
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent-glow);
+      white-space: pre;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
 
-/* ── CONTACT ────────────────────────────────────────────────────── */
-.contact-box {
-  background: var(--bg-panel);
-  border: 1px solid var(--green-dim);
-  padding: 1.5rem;
-  font-family: var(--font-term);
-  font-size: clamp(11px, 1.6vw, 13px);
-  line-height: 2.2;
-  box-shadow: 0 0 20px rgba(51,255,102,0.05);
-}
+    #boot-splash.visible {
+      opacity: 1;
+    }
 
-.contact-box .box-top,
-.contact-box .box-bot {
-  color: var(--text-dim);
-  font-family: var(--font-ascii);
-  white-space: pre;
-  font-size: clamp(9px, 1.2vw, 11px);
-  line-height: 1.2;
-}
+    #boot-bar {
+      margin-top: 0.5rem;
+      font-size: clamp(11px, 1.6vw, 14px);
+      color: var(--text-dim);
+      white-space: pre;
+      line-height: 1.6;
+    }
 
-.contact-row { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
-.c-key   { color: var(--text-dim); min-width: 13ch; white-space: pre; }
-.c-val   { color: var(--text); }
-.c-val a { color: var(--green); text-decoration: none; }
-.c-val a:hover { text-decoration: underline; color: var(--accent); }
+    #boot-bar .bar-fill {
+      color: var(--green);
+    }
 
-#copy-btn {
-  font-family: var(--font-term);
-  font-size: clamp(10px, 1.3vw, 12px);
-  background: transparent;
-  border: 1px solid var(--green-dim);
-  color: var(--green);
-  padding: 0.1rem 0.5rem;
-  cursor: pointer;
-  margin-left: 1rem;
-  transition: all 0.15s;
-}
-#copy-btn:hover {
-  background: var(--green-dim);
-  color: var(--bg);
-}
-#copy-btn.copied {
-  color: var(--accent);
-  border-color: var(--accent);
-}
+    #boot-bar .bar-pct {
+      color: var(--accent);
+    }
 
-/* ── FOOTER ─────────────────────────────────────────────────────── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 2rem 0 3rem;
-}
+    #boot-prompt {
+      margin-top: 0.6rem;
+      font-size: clamp(11px, 1.6vw, 14px);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
 
-.footer-text {
-  font-family: var(--font-label);
-  font-size: clamp(10px, 1.4vw, 12px);
-  color: var(--text-dim);
-  text-align: center;
-  line-height: 2;
-}
-.footer-text .hi    { color: var(--accent); }
-.footer-text .green { color: var(--green); }
-.footer-eof {
-  font-family: var(--font-ascii);
-  font-size: clamp(10px, 1.5vw, 13px);
-  color: var(--text-dim);
-  text-align: center;
-  margin-top: 1rem;
-}
+    #boot-prompt.visible {
+      opacity: 1;
+    }
 
-/* ── MOBILE ─────────────────────────────────────────────────────── */
-@media (max-width: 599px) {
-  .ascii-art-full  { display: none; }
-  .ascii-art-mini  { display: inline-block !important; }
-  .hero-pre-wrap .scroll-hint { display: block; }
+    #boot-cursor {
+      animation: blink 0.7s step-end infinite;
+    }
 
-  .bbs-row { flex-direction: column; gap: 0; }
-  .bbs-key { min-width: 0; }
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
 
-  .ls-perms { display: none; }
-  .ls-size  { display: none; }
+    /* ── HERO ───────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 0;
+      position: relative;
+    }
 
-  .tl-item { grid-template-columns: 6ch 1ch 1fr; }
+    .hero-pre-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      max-width: 100vw;
+      padding: 0 0.5rem;
+    }
 
-  #hero { min-height: calc(100vh - 2rem); }
-}
+    .hero-pre-wrap .scroll-hint {
+      display: none;
+      font-family: var(--font-term);
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 0.3rem;
+    }
 
-@media (min-width: 600px) and (max-width: 899px) {
-  .ascii-art { font-size: clamp(0.28rem, 0.55vw, 0.6rem); }
-}
 
-/* ── CURSOR BLINK SPAN ──────────────────────────────────────────── */
-.cursor { animation: blink 0.7s step-end infinite; color: var(--green); }
+    .ascii-art {
+      display: inline-block;
+      text-align: left;
+      font-family: var(--font-ascii);
+      font-size: clamp(0.35rem, 0.82vw, 0.95rem);
+      line-height: 1.15;
+      color: var(--accent);
+      text-shadow:
+        0 0 4px var(--accent-glow),
+        0 0 12px rgba(255, 149, 0, 0.3);
+      white-space: pre;
+      animation: glow-pulse 3s ease-in-out infinite;
+      cursor: default;
+      transition: all 0.05s;
+      user-select: none;
+      letter-spacing: 0;
+      font-kerning: none;
+      font-variant-ligatures: none;
+    }
 
-/* ── KONAMI EASTER EGG ──────────────────────────────────────────── */
-body.konami-mode {
-  --text:   #33ff66;
-  --accent: #33ff66;
-  --accent-glow: #00cc44;
-}
-body.konami-mode .ascii-art { color: var(--green); animation: rainbow 1s linear infinite; }
-@keyframes rainbow {
-  0%   { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-</style>
+    .ascii-art-mini {
+      text-align: left;
+    }
+
+
+    .ascii-art:hover {
+      animation: glitch 0.3s steps(2) forwards, glow-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+
+      0%,
+      100% {
+        text-shadow: 0 0 4px var(--accent-glow), 0 0 12px rgba(255, 149, 0, 0.3);
+      }
+
+      50% {
+        text-shadow: 0 0 8px var(--accent-glow), 0 0 22px rgba(255, 149, 0, 0.5), 0 0 40px rgba(255, 184, 51, 0.2);
+      }
+    }
+
+    @keyframes glitch {
+      0% {
+        clip-path: inset(0 0 90% 0);
+        transform: translate(-3px, 0);
+        color: var(--green);
+      }
+
+      20% {
+        clip-path: inset(40% 0 40% 0);
+        transform: translate(3px, 0);
+        color: var(--accent);
+      }
+
+      40% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(-2px, 0);
+        color: var(--green);
+      }
+
+      60% {
+        clip-path: inset(20% 0 60% 0);
+        transform: translate(2px, 0);
+        color: var(--accent);
+      }
+
+      80% {
+        clip-path: inset(60% 0 20% 0);
+        transform: translate(0, 0);
+        color: var(--accent);
+      }
+
+      100% {
+        clip-path: inset(0 0 0 0);
+        transform: translate(0, 0);
+        color: var(--accent);
+      }
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-label);
+      font-size: clamp(14px, 2.2vw, 20px);
+      color: var(--text);
+      margin-top: 2rem;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-subtitle span {
+      color: var(--text-dim);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-term);
+      font-size: clamp(10px, 1.3vw, 12px);
+      color: var(--text-dim);
+      text-align: center;
+      animation: scroll-bob 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator .arrow {
+      display: block;
+      color: var(--green);
+      font-size: 1.4em;
+      margin-top: 0.3rem;
+    }
+
+    @keyframes scroll-bob {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(6px);
+      }
+    }
+
+    /* ── INLINE NAV (inside content) ─────────────────────────────────── */
+    .inline-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      padding: 1.2rem 0;
+      font-family: var(--font-head);
+      font-size: clamp(10px, 1.5vw, 13px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .inline-nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.1rem 0.3rem;
+      border: 1px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .inline-nav a::before {
+      content: '[';
+      color: var(--text-dim);
+    }
+
+    .inline-nav a::after {
+      content: ']';
+      color: var(--text-dim);
+    }
+
+    .inline-nav a:hover {
+      color: var(--green);
+      border-color: var(--green-dim);
+      text-shadow: 0 0 6px var(--green);
+    }
+
+    .inline-nav a:hover::before {
+      content: '>';
+      color: var(--green);
+    }
+
+    .inline-nav a:hover::after {
+      content: '<';
+      color: var(--green);
+    }
+
+    /* ── SECTIONS ───────────────────────────────────────────────────── */
+    section {
+      padding: 3rem 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    #hero {
+      border-top: none;
+    }
+
+    .section-prompt {
+      font-family: var(--font-term);
+      font-size: clamp(11px, 1.8vw, 14px);
+      color: var(--text-dim);
+      margin-bottom: 0.3rem;
+    }
+
+    .section-prompt .prompt-user {
+      color: var(--green);
+    }
+
+    .section-prompt .prompt-dir {
+      color: var(--accent);
+    }
+
+    .section-prompt .prompt-cmd {
+      color: var(--text);
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(14px, 2vw, 18px);
+      color: var(--accent);
+      text-shadow: 0 0 6px var(--accent-glow);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .section-title.visible {
+      opacity: 1;
+    }
+
+    /* ── WHOAMI ─────────────────────────────────────────────────────── */
+    .bbs-profile {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.5rem;
+      font-family: var(--font-term);
+      font-size: clamp(11px, 1.6vw, 13px);
+      line-height: 2;
+    }
+
+    .bbs-row {
+      display: flex;
+      gap: 0;
+    }
+
+    .bbs-key {
+      color: var(--text-dim);
+      white-space: pre;
+      min-width: 14ch;
+    }
+
+    .bbs-sep {
+      color: var(--text-dim);
+      margin: 0 0.5rem;
+    }
+
+    .bbs-val {
+      color: var(--text);
+    }
+
+    .bbs-val .hi {
+      color: var(--accent);
+    }
+
+    .bbs-val .green {
+      color: var(--green);
+    }
+
+    .bbs-profile .bbs-top {
+      color: var(--text-dim);
+      font-family: var(--font-ascii);
+      margin-bottom: 0.5rem;
+      white-space: pre;
+      font-size: clamp(9px, 1.3vw, 11px);
+    }
+
+    /* ── SKILLS ─────────────────────────────────────────────────────── */
+    .ls-output {
+      font-family: var(--font-term);
+      font-size: clamp(11px, 1.6vw, 13px);
+      line-height: 1.8;
+    }
+
+    .ls-total {
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .ls-group-header {
+      display: flex;
+      gap: 1rem;
+      color: var(--accent);
+      margin-top: 0.8rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.2rem;
+    }
+
+    .ls-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+      padding: 0.05rem 0;
+    }
+
+    .ls-perms {
+      color: var(--text-dim);
+      min-width: 12ch;
+    }
+
+    .ls-size {
+      color: var(--text-dim);
+      min-width: 6ch;
+      text-align: right;
+      margin-right: 1ch;
+    }
+
+    .ls-name {
+      color: var(--green);
+    }
+
+    .ls-name.dir {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .ls-tag {
+      color: var(--text-dim);
+      margin-left: 1rem;
+      font-size: 0.9em;
+    }
+
+    /* ── PROJECTS ───────────────────────────────────────────────────── */
+    .project-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green-dim), transparent);
+    }
+
+    .cat-header {
+      font-family: var(--font-term);
+      font-size: clamp(10px, 1.4vw, 12px);
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    .cat-header .green {
+      color: var(--green);
+    }
+
+    .proj-ascii {
+      font-family: var(--font-deco);
+      font-size: clamp(0.5rem, 1vw, 0.85rem);
+      color: var(--accent);
+      white-space: pre;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px var(--accent-glow);
+    }
+
+    .proj-desc {
+      font-family: var(--font-body);
+      font-size: clamp(11px, 1.6vw, 13px);
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .proj-features {
+      font-family: var(--font-term);
+      font-size: clamp(10px, 1.4vw, 12px);
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .feat-check {
+      color: var(--green);
+    }
+
+    .proj-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      font-family: var(--font-label);
+      font-size: clamp(10px, 1.4vw, 12px);
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.8rem;
+    }
+
+    .proj-meta .stack-item {
+      color: var(--text);
+    }
+
+    .proj-link {
+      font-family: var(--font-term);
+      font-size: clamp(11px, 1.6vw, 13px);
+      color: var(--green);
+      text-decoration: none;
+      border: 1px solid var(--green-dim);
+      padding: 0.2rem 0.6rem;
+      display: inline-block;
+      transition: all 0.15s;
+      text-shadow: 0 0 4px rgba(51, 255, 102, 0.4);
+    }
+
+    .proj-link:hover {
+      background: var(--green-dim);
+      color: var(--bg);
+      text-shadow: none;
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    .load-bar-wrap {
+      font-family: var(--font-term);
+      font-size: clamp(10px, 1.4vw, 12px);
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    .load-bar-track {
+      display: inline-block;
+    }
+
+    .load-bar-fill {
+      color: var(--green);
+    }
+
+    .load-bar-empty {
+      color: var(--text-dim);
+    }
+
+    .load-bar-pct {
+      color: var(--accent);
+      margin-left: 0.5rem;
+    }
+
+    /* ── HISTORY / TIMELINE ─────────────────────────────────────────── */
+    .timeline {
+      font-family: var(--font-term);
+      font-size: clamp(11px, 1.6vw, 13px);
+      line-height: 1;
+      position: relative;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 8ch 2ch 1fr;
+      gap: 0.5rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .tl-item:last-child {
+      border-bottom: none;
+    }
+
+    .tl-year {
+      color: var(--accent);
+      font-family: var(--font-head);
+    }
+
+    .tl-sep {
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    .tl-text {
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .tl-text .tag {
+      color: var(--green);
+      font-size: 0.9em;
+      border: 1px solid var(--green-dim);
+      padding: 0 0.3rem;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    /* ── CONTACT ────────────────────────────────────────────────────── */
+    .contact-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--green-dim);
+      padding: 1.5rem;
+      font-family: var(--font-term);
+      font-size: clamp(11px, 1.6vw, 13px);
+      line-height: 2.2;
+      box-shadow: 0 0 20px rgba(51, 255, 102, 0.05);
+    }
+
+    .contact-box .box-top,
+    .contact-box .box-bot {
+      color: var(--text-dim);
+      font-family: var(--font-ascii);
+      white-space: pre;
+      font-size: clamp(9px, 1.2vw, 11px);
+      line-height: 1.2;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .c-key {
+      color: var(--text-dim);
+      min-width: 13ch;
+      white-space: pre;
+    }
+
+    .c-val {
+      color: var(--text);
+    }
+
+    .c-val a {
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    .c-val a:hover {
+      text-decoration: underline;
+      color: var(--accent);
+    }
+
+    #copy-btn {
+      font-family: var(--font-term);
+      font-size: clamp(10px, 1.3vw, 12px);
+      background: transparent;
+      border: 1px solid var(--green-dim);
+      color: var(--green);
+      padding: 0.1rem 0.5rem;
+      cursor: pointer;
+      margin-left: 1rem;
+      transition: all 0.15s;
+    }
+
+    #copy-btn:hover {
+      background: var(--green-dim);
+      color: var(--bg);
+    }
+
+    #copy-btn.copied {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0 3rem;
+    }
+
+    .footer-text {
+      font-family: var(--font-label);
+      font-size: clamp(10px, 1.4vw, 12px);
+      color: var(--text-dim);
+      text-align: center;
+      line-height: 2;
+    }
+
+    .footer-text .hi {
+      color: var(--accent);
+    }
+
+    .footer-text .green {
+      color: var(--green);
+    }
+
+    .footer-eof {
+      font-family: var(--font-ascii);
+      font-size: clamp(10px, 1.5vw, 13px);
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* ── MOBILE ─────────────────────────────────────────────────────── */
+    @media (max-width: 599px) {
+      .ascii-art-full {
+        display: none;
+      }
+
+      .ascii-art-mini {
+        display: inline-block !important;
+      }
+
+      .hero-pre-wrap .scroll-hint {
+        display: block;
+      }
+
+      .bbs-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .bbs-key {
+        min-width: 0;
+      }
+
+      .ls-perms {
+        display: none;
+      }
+
+      .ls-size {
+        display: none;
+      }
+
+      .tl-item {
+        grid-template-columns: 6ch 1ch 1fr;
+      }
+
+      #hero {
+        min-height: calc(100vh - 2rem);
+      }
+    }
+
+    @media (min-width: 600px) and (max-width: 899px) {
+      .ascii-art {
+        font-size: clamp(0.28rem, 0.55vw, 0.6rem);
+      }
+    }
+
+    @media (max-width: 599px) {
+      .ascii-art-full {
+        display: none;
+      }
+
+      .ascii-art-mini {
+        display: inline-block !important;
+      }
+
+      .proj-ascii {
+        font-size: 6px;
+        line-height: 1.05;
+      }
+
+      .hero-pre-wrap .scroll-hint {
+        display: block;
+      }
+
+      .bbs-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .bbs-key {
+        min-width: 0;
+      }
+
+      .ls-perms {
+        display: none;
+      }
+
+      .ls-size {
+        display: none;
+      }
+
+      .tl-item {
+        grid-template-columns: 6ch 1ch 1fr;
+      }
+
+      #hero {
+        min-height: calc(100vh - 2rem);
+      }
+    }
+
+    /* ── CURSOR BLINK SPAN ──────────────────────────────────────────── */
+    .cursor {
+      animation: blink 0.7s step-end infinite;
+      color: var(--green);
+    }
+
+    /* ── KONAMI EASTER EGG ──────────────────────────────────────────── */
+    body.konami-mode {
+      --text: #33ff66;
+      --accent: #33ff66;
+      --accent-glow: #00cc44;
+    }
+
+    body.konami-mode .ascii-art {
+      color: var(--green);
+      animation: rainbow 1s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0% {
+        filter: hue-rotate(0deg);
+      }
+
+      100% {
+        filter: hue-rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ─── CRT TURN-ON ─────────────────────────────────────────────── -->
-<div id="crt-turnon" aria-hidden="true">
-  <div class="crt-line"></div>
-</div>
+  <!-- ─── CRT TURN-ON ─────────────────────────────────────────────── -->
+  <div id="crt-turnon" aria-hidden="true">
+    <div class="crt-line"></div>
+  </div>
 
-<!-- ─── BOOT OVERLAY ────────────────────────────────────────────── -->
-<div id="boot-overlay" aria-hidden="true">
-  <div id="boot-screen">
-    <span class="boot-line boot-white" id="b-title"></span>
-    <span class="boot-line boot-info"  id="b-copy"></span>
-    <span class="boot-line boot-info"  id="b-sep"></span>
-    <span class="boot-line boot-info"  id="b-cpu"></span>
-    <span class="boot-line boot-ok"    id="b-ram"></span>
-    <span class="boot-line boot-info"  id="b-kb"></span>
-    <span class="boot-line boot-info"  id="b-vid"></span>
-    <span class="boot-line boot-info"  id="b-sep2"></span>
-    <span class="boot-line boot-info"  id="b-detect"></span>
-    <span class="boot-line boot-ok"    id="b-d1"></span>
-    <span class="boot-line boot-ok"    id="b-d2"></span>
-    <span class="boot-line boot-ok"    id="b-d3"></span>
-    <span class="boot-line boot-ok"    id="b-d4"></span>
-    <span class="boot-line boot-ok"    id="b-d5"></span>
-    <span class="boot-line boot-info"  id="b-sep3"></span>
-    <div id="boot-splash"></div>
-    <div id="boot-bar">Loading: [<span class="bar-fill"></span><span class="bar-empty">........................</span>] <span class="bar-pct">0%</span></div>
-    <div id="boot-prompt">
-      <span style="color:var(--green)">phpont@portfolio:~$ </span><span id="boot-cursor">█</span>
+  <!-- ─── BOOT OVERLAY ────────────────────────────────────────────── -->
+  <div id="boot-overlay" aria-hidden="true">
+    <div id="boot-screen">
+      <span class="boot-line boot-white" id="b-title"></span>
+      <span class="boot-line boot-info" id="b-copy"></span>
+      <span class="boot-line boot-info" id="b-sep"></span>
+      <span class="boot-line boot-info" id="b-cpu"></span>
+      <span class="boot-line boot-ok" id="b-ram"></span>
+      <span class="boot-line boot-info" id="b-kb"></span>
+      <span class="boot-line boot-info" id="b-vid"></span>
+      <span class="boot-line boot-info" id="b-sep2"></span>
+      <span class="boot-line boot-info" id="b-detect"></span>
+      <span class="boot-line boot-ok" id="b-d1"></span>
+      <span class="boot-line boot-ok" id="b-d2"></span>
+      <span class="boot-line boot-ok" id="b-d3"></span>
+      <span class="boot-line boot-ok" id="b-d4"></span>
+      <span class="boot-line boot-ok" id="b-d5"></span>
+      <span class="boot-line boot-info" id="b-sep3"></span>
+      <div id="boot-splash"></div>
+      <div id="boot-bar">Loading: [<span class="bar-fill"></span><span
+          class="bar-empty">........................</span>] <span class="bar-pct">0%</span></div>
+      <div id="boot-prompt">
+        <span style="color:var(--green)">phpont@portfolio:~$ </span><span id="boot-cursor">█</span>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ─── HERO ────────────────────────────────────────────────────── -->
-<main>
-<section id="hero">
-  <div class="hero-pre-wrap">
-    <div class="scroll-hint">&lt;-- scroll horizontal --&gt;</div>
+  <!-- ─── HERO ────────────────────────────────────────────────────── -->
+  <main>
+    <section id="hero">
+      <div class="hero-pre-wrap">
 
-    <pre class="ascii-art ascii-art-full" aria-label="Paulo Pontarolo em arte ASCII">
+        <pre class="ascii-art ascii-art-full" aria-label="Paulo Pontarolo em arte ASCII">
 $$$$$$$\                     $$\                 $$$$$$$\                       $$\                                   $$\
 $$  __$$\                    $$ |                $$  __$$\                      $$ |                                  $$ |
 $$ |  $$ |$$$$$$\  $$\   $$\ $$ | $$$$$$\        $$ |  $$ | $$$$$$\  $$$$$$$\ $$$$$$\    $$$$$$\   $$$$$$\   $$$$$$\  $$ | $$$$$$\
@@ -688,521 +1170,524 @@ $$ |     $$  __$$ |$$ |  $$ |$$ |$$ |  $$ |      $$ |      $$ |  $$ |$$ |  $$ | 
 $$ |     \$$$$$$$ |\$$$$$$  |$$ |\$$$$$$  |      $$ |      \$$$$$$  |$$ |  $$ | \$$$$  |\$$$$$$$ |$$ |      \$$$$$$  |$$ |\$$$$$$  |
 \__|      \_______| \______/ \__| \______/       \__|       \______/ \__|  \__|  \____/  \_______|\__|       \______/ \__| \______/</pre>
 
-    <pre class="ascii-art ascii-art-mini" style="display:none;font-size:clamp(0.45rem,2.8vw,0.7rem)" aria-label="Paulo Pontarolo">
-$$$$$$$\            $$\
-$$  __$$\           $$ |
-$$ |  $$ |$$$$$$\  $$\   $$\ $$ | $$$$$$\
-$$$$$$$  |\____$$\ $$ |  $$ |$$ |$$  __$$\
-$$  ____/ $$$$$$$ |$$ |  $$ |$$ |$$ /  $$ |
-$$ |     $$  __$$ |$$ |  $$ |$$ |$$ |  $$ |
-$$ |     \$$$$$$$ |\$$$$$$  |$$ |\$$$$$$  |
-\__|      \_______| \______/ \__| \______/
-$$$$$$$\                       $$\                                   $$\
-$$  __$$\                      $$ |                                  $$ |
-$$ |  $$ | $$$$$$\  $$$$$$$\ $$$$$$\    $$$$$$\   $$$$$$\   $$$$$$\  $$ | $$$$$$\
-$$$$$$$  |$$  __$$\ $$  __$$\\_$$  _|   \____$$\ $$  __$$\ $$  __$$\ $$ |$$  __$$\
-$$  ____/ $$ /  $$ |$$ |  $$ | $$ |     $$$$$$$ |$$ |  \__|$$ /  $$ |$$ |$$ /  $$ |
-$$ |      $$ |  $$ |$$ |  $$ | $$ |$$\ $$  __$$ |$$ |      $$ |  $$ |$$ |$$ |  $$ |
-$$ |      \$$$$$$  |$$ |  $$ | \$$$$  |\$$$$$$$ |$$ |      \$$$$$$  |$$ |\$$$$$$  |
-\__|       \______/ \__|  \__|  \____/  \_______|\__|       \______/ \__| \______/</pre>
-  </div>
-
-  <p class="hero-subtitle">
-    FULL-STACK DEVELOPER <span>//</span> BLUMENAU, BR<span class="cursor"> █</span>
-  </p>
-
-  <div class="scroll-indicator" aria-hidden="true">
-    <span>scroll</span>
-    <span class="arrow">▼</span>
-  </div>
-</section>
-
-
-
-<!-- ─── WHOAMI ───────────────────────────────────────────────────── -->
-<section id="whoami">
-  <div class="container">
-    <p class="section-prompt">
-      <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$ </span><span class="prompt-cmd">whoami</span>
-    </p>
-    <h2 class="section-title" data-typing="// sobre mim">&nbsp;</h2>
-
-    <div class="bbs-profile">
-      <div class="bbs-top">+--[ PERFIL ]----------------------------------------------+</div>
-      <div class="bbs-row">
-        <span class="bbs-key">  nome.......: </span>
-        <span class="bbs-val"><span class="hi">Paulo Pontarolo</span></span>
-      </div>
-      <div class="bbs-row">
-        <span class="bbs-key">  localizacao: </span>
-        <span class="bbs-val">Blumenau, SC, Brasil</span>
-      </div>
-      <div class="bbs-row">
-        <span class="bbs-key">  foco.......: </span>
-        <span class="bbs-val">Full-Stack Web Development</span>
-      </div>
-      <div class="bbs-row">
-        <span class="bbs-key">  formacao...: </span>
-        <span class="bbs-val">Ciencia da Computacao <span class="green">[em curso]</span></span>
-      </div>
-      <div class="bbs-row">
-        <span class="bbs-key">  stack......: </span>
-        <span class="bbs-val"><span class="hi">TypeScript</span>, Next.js, Node, Postgres, <span class="hi">Rust</span></span>
-      </div>
-      <div class="bbs-row">
-        <span class="bbs-key">  idiomas....: </span>
-        <span class="bbs-val">Portugues (nativo), Ingles (avancado)</span>
-      </div>
-     
-      <div class="bbs-top" style="margin-top:.5rem">+----------------------------------------------------------+</div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── SKILLS ───────────────────────────────────────────────────── -->
-<section id="skills">
-  <div class="container">
-    <p class="section-prompt">
-      <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$ </span><span class="prompt-cmd">ls -la ./skills/</span>
-    </p>
-    <h2 class="section-title" data-typing="// tech stack">&nbsp;</h2>
-
-    <div class="ls-output">
-      <div class="ls-total">total 42</div>
-
-      <div class="ls-group-header">
-        <span class="ls-perms">drwxr-xr-x</span>
-        <span class="ls-size ls-name dir">CORE</span>
-      </div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">4.2K</span><span class="ls-name">TypeScript</span><span class="ls-tag">linguagem principal</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">6.1K</span><span class="ls-name">Next.js / React</span><span class="ls-tag">frontend & SSR</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">3.8K</span><span class="ls-name">Node.js</span><span class="ls-tag">backend</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">5.0K</span><span class="ls-name">PostgreSQL</span><span class="ls-tag">banco de dados</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">2.9K</span><span class="ls-name">Rust</span><span class="ls-tag">sistemas / CLI</span></div>
-
-      <div class="ls-group-header" style="margin-top:.8rem">
-        <span class="ls-perms">drwxr-xr-x</span>
-        <span class="ls-size ls-name dir">TOOLS</span>
-      </div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">1.8K</span><span class="ls-name">Git / GitHub</span><span class="ls-tag">controle de versao</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">1.5K</span><span class="ls-name">Docker</span><span class="ls-tag">containers</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">2.1K</span><span class="ls-name">Vite</span><span class="ls-tag">build tool</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">1.2K</span><span class="ls-name">GitHub Actions</span><span class="ls-tag">CI/CD</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">1.0K</span><span class="ls-name">Cloudflare Workers</span><span class="ls-tag">edge computing</span></div>
-
-      <div class="ls-group-header" style="margin-top:.8rem">
-        <span class="ls-perms">drwxr-xr-x</span>
-        <span class="ls-size ls-name dir">EXTRAS</span>
-      </div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size"> 800</span><span class="ls-name">Linux / Shell</span><span class="ls-tag">scripting & automacao</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size"> 600</span><span class="ls-name">Tailwind CSS</span><span class="ls-tag">estilizacao</span></div>
-      <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size"> 400</span><span class="ls-name">Prisma / Drizzle</span><span class="ls-tag">ORM</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PROJECTS ─────────────────────────────────────────────────── -->
-<section id="projects">
-  <div class="container">
-    <p class="section-prompt">
-      <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$ </span><span class="prompt-cmd">ls ./projects/</span>
-    </p>
-    <h2 class="section-title" data-typing="// projetos">&nbsp;</h2>
-
-    <!-- DopePad -->
-    <div class="project-card" data-project="dopepad">
-      <div class="cat-header">
-        <span class="green">phpont@portfolio</span><span style="color:var(--text-dim)">:~$ cat </span><span class="green">./projects/dopepad.md</span>
+        <pre class="ascii-art ascii-art-mini" style="display:none;font-size:clamp(0.45rem,2.8vw,0.7rem)"
+          aria-label="Paulo Pontarolo">
+    $$$$$$$╲                     $$╲           
+    $$  __$$╲                    $$ │          
+    $$ │  $$ │$$$$$$╲  $$╲   $$╲ $$ │ $$$$$$╲  
+    $$$$$$$  │╲____$$╲ $$ │  $$ │$$ │$$  __$$╲ 
+    $$  ____╱ $$$$$$$ │$$ │  $$ │$$ │$$ ╱  $$ │
+    $$ │     $$  __$$ │$$ │  $$ │$$ │$$ │  $$ │
+    $$ │     ╲$$$$$$$ │╲$$$$$$  │$$ │╲$$$$$$  │
+    ╲__│      ╲_______│ ╲______╱ ╲__│ ╲______╱ 
+</pre>
       </div>
 
-      <pre class="proj-ascii">________                      __________             .___
+      <p class="hero-subtitle">
+        FULL-STACK DEVELOPER <span>//</span> BLUMENAU, BR<span class="cursor"> █</span>
+      </p>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>scroll</span>
+        <span class="arrow">▼</span>
+      </div>
+    </section>
+
+
+
+    <!-- ─── WHOAMI ───────────────────────────────────────────────────── -->
+    <section id="whoami">
+      <div class="container">
+        <p class="section-prompt">
+          <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span
+            style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$
+          </span><span class="prompt-cmd">whoami</span>
+        </p>
+        <h2 class="section-title" data-typing="// sobre mim">&nbsp;</h2>
+
+        <div class="bbs-profile">
+          <div class="bbs-top">+--[ PERFIL ]----------------------------------------------+</div>
+          <div class="bbs-row">
+            <span class="bbs-key"> nome.......: </span>
+            <span class="bbs-val"><span class="hi">Paulo Pontarolo</span></span>
+          </div>
+          <div class="bbs-row">
+            <span class="bbs-key"> localizacao: </span>
+            <span class="bbs-val">Blumenau, SC, Brasil</span>
+          </div>
+          <div class="bbs-row">
+            <span class="bbs-key"> foco.......: </span>
+            <span class="bbs-val">Full-Stack Web Development</span>
+          </div>
+          <div class="bbs-row">
+            <span class="bbs-key"> formacao...: </span>
+            <span class="bbs-val">Ciencia da Computacao <span class="green">[em curso]</span></span>
+          </div>
+          <div class="bbs-row">
+            <span class="bbs-key"> stack......: </span>
+            <span class="bbs-val"><span class="hi">TypeScript</span>, Next.js, Node, Postgres, <span
+                class="hi">Rust</span></span>
+          </div>
+          <div class="bbs-row">
+            <span class="bbs-key"> idiomas....: </span>
+            <span class="bbs-val">Portugues (nativo), Ingles (avancado)</span>
+          </div>
+
+          <div class="bbs-top" style="margin-top:.5rem">+----------------------------------------------------------+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SKILLS ───────────────────────────────────────────────────── -->
+    <section id="skills">
+      <div class="container">
+        <p class="section-prompt">
+          <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span
+            style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$
+          </span><span class="prompt-cmd">ls -la ./skills/</span>
+        </p>
+        <h2 class="section-title" data-typing="// tech stack">&nbsp;</h2>
+
+        <div class="ls-output">
+          <div class="ls-total">total 42</div>
+
+          <div class="ls-group-header">
+            <span class="ls-perms">drwxr-xr-x</span>
+            <span class="ls-size ls-name dir">CORE</span>
+          </div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">4.2K</span><span
+              class="ls-name">TypeScript</span><span class="ls-tag">linguagem principal</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">6.1K</span><span
+              class="ls-name">Next.js / React</span><span class="ls-tag">frontend & SSR</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">3.8K</span><span
+              class="ls-name">Node.js</span><span class="ls-tag">backend</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">5.0K</span><span
+              class="ls-name">PostgreSQL</span><span class="ls-tag">banco de dados</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">2.9K</span><span
+              class="ls-name">Rust</span><span class="ls-tag">sistemas / CLI</span></div>
+
+          <div class="ls-group-header" style="margin-top:.8rem">
+            <span class="ls-perms">drwxr-xr-x</span>
+            <span class="ls-size ls-name dir">TOOLS</span>
+          </div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">1.8K</span><span
+              class="ls-name">Git / GitHub</span><span class="ls-tag">controle de versao</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">1.5K</span><span
+              class="ls-name">Docker</span><span class="ls-tag">containers</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">2.1K</span><span
+              class="ls-name">Vite</span><span class="ls-tag">build tool</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">1.2K</span><span
+              class="ls-name">GitHub Actions</span><span class="ls-tag">CI/CD</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size">1.0K</span><span
+              class="ls-name">Cloudflare Workers</span><span class="ls-tag">edge computing</span></div>
+
+          <div class="ls-group-header" style="margin-top:.8rem">
+            <span class="ls-perms">drwxr-xr-x</span>
+            <span class="ls-size ls-name dir">EXTRAS</span>
+          </div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size"> 800</span><span
+              class="ls-name">Linux / Shell</span><span class="ls-tag">scripting & automacao</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size"> 600</span><span
+              class="ls-name">Tailwind CSS</span><span class="ls-tag">estilizacao</span></div>
+          <div class="ls-row"><span class="ls-perms">-rw-r--r--</span><span class="ls-size"> 400</span><span
+              class="ls-name">Prisma / Drizzle</span><span class="ls-tag">ORM</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROJECTS ─────────────────────────────────────────────────── -->
+    <section id="projects">
+      <div class="container">
+        <p class="section-prompt">
+          <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span
+            style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$
+          </span><span class="prompt-cmd">ls ./projects/</span>
+        </p>
+        <h2 class="section-title" data-typing="// projetos">&nbsp;</h2>
+
+        <!-- DopePad -->
+        <div class="project-card" data-project="dopepad">
+          <div class="cat-header">
+            <span class="green">phpont@portfolio</span><span style="color:var(--text-dim)">:~$ cat </span><span
+              class="green">./projects/dopepad.md</span>
+          </div>
+
+          <pre class="proj-ascii">________                      __________             .___
 \______ \   ____ ______   ____\______   \_____     __| _/
  |    |  \ /  _ \\____ \_/ __ \|     ___/\__  \   / __ | 
  |    `   (  <_> )  |_> >  ___/|    |     / __ \_/ /_/ | 
 /_______  /\____/|   __/ \___  >____|    (____  /\____ | 
         \/       |__|        \/               \/      \/ </pre>
 
-      <div class="load-bar-wrap" data-loadbar>
-        LOADING: <span class="load-bar-track">[<span class="load-bar-fill"></span><span class="load-bar-empty">................</span>]</span><span class="load-bar-pct">0%</span>
-      </div>
+          <div class="load-bar-wrap" data-loadbar>
+            LOADING: <span class="load-bar-track">[<span class="load-bar-fill"></span><span
+                class="load-bar-empty">................</span>]</span><span class="load-bar-pct">0%</span>
+          </div>
 
-      <p class="proj-desc">
-        Notepad minimalista com estetica terminal, escrito em Rust.<br>
-        Interface de linha de comando limpa, zero dependencias desnecessarias,<br>
-        focado em velocidade e simplicidade.
-      </p>
+          <p class="proj-desc">
+            Notepad minimalista com estetica terminal, escrito em Rust.<br>
+            Interface de linha de comando limpa, zero dependencias desnecessarias,<br>
+            focado em velocidade e simplicidade.
+          </p>
 
-      <div class="proj-features">
-        <div><span class="feat-check">[x]</span> Editor de texto no terminal</div>
-        <div><span class="feat-check">[x]</span> Escrito em Rust (zero GC)</div>
-        <div><span class="feat-check">[x]</span> Sem dependencias de runtime</div>
-        <div><span class="feat-check">[x]</span> Multiplataforma (Linux / macOS / Windows)</div>
-        <div><span style="color:var(--text-dim)">[ ]</span> Syntax highlighting (em progresso)</div>
-      </div>
+          <div class="proj-features">
+            <div><span class="feat-check">[x]</span> Editor de texto no terminal</div>
+            <div><span class="feat-check">[x]</span> Escrito em Rust (zero GC)</div>
+            <div><span class="feat-check">[x]</span> Sem dependencias de runtime</div>
+            <div><span class="feat-check">[x]</span> Multiplataforma (Linux / macOS / Windows)</div>
+            <div><span style="color:var(--text-dim)">[ ]</span> Syntax highlighting (em progresso)</div>
+          </div>
 
-      <div class="proj-meta">
-        <span>STACK:</span>
-        <span class="stack-item">Rust</span>
-        <span class="stack-item">CLI</span>
-        <span class="stack-item">Crossterm</span>
-      </div>
+          <div class="proj-meta">
+            <span>STACK:</span>
+            <span class="stack-item">Rust</span>
+            <span class="stack-item">CLI</span>
+            <span class="stack-item">Crossterm</span>
+          </div>
 
-      <a class="proj-link" href="https://github.com/phpont/dopepad" target="_blank" rel="noopener">
-        [&gt; github.com/phpont/dopepad]
-      </a>
-    </div>
+          <a class="proj-link" href="https://github.com/phpont/dopepad" target="_blank" rel="noopener">
+            [&gt; github.com/phpont/dopepad]
+          </a>
+        </div>
 
-    <!-- DopeWifiTest -->
-    <div class="project-card" data-project="dopewifitest">
-      <div class="cat-header">
-        <span class="green">phpont@portfolio</span><span style="color:var(--text-dim)">:~$ cat </span><span class="green">./projects/dopewifitest.md</span>
-      </div>
+        <!-- DopeWifiTest -->
+        <div class="project-card" data-project="dopewifitest">
+          <div class="cat-header">
+            <span class="green">phpont@portfolio</span><span style="color:var(--text-dim)">:~$ cat </span><span
+              class="green">./projects/dopewifitest.md</span>
+          </div>
 
-      <pre class="proj-ascii">________                       __      __.__  _____.__ 
+          <pre class="proj-ascii">________                       __      __.__  _____.__ 
 \______ \   ____ ______   ____/  \    /  \__|/ ____\__|
  |    |  \ /  _ \\____ \_/ __ \   \/\/   /  \   __\|  |
  |    `   (  <_> )  |_> >  ___/\        /|  ||  |  |  |
 /_______  /\____/|   __/ \___  >\__/\  / |__||__|  |__|
         \/       |__|        \/      \/                </pre>
 
-      <div class="load-bar-wrap" data-loadbar>
-        LOADING: <span class="load-bar-track">[<span class="load-bar-fill"></span><span class="load-bar-empty">................</span>]</span><span class="load-bar-pct">0%</span>
+          <div class="load-bar-wrap" data-loadbar>
+            LOADING: <span class="load-bar-track">[<span class="load-bar-fill"></span><span
+                class="load-bar-empty">................</span>]</span><span class="load-bar-pct">0%</span>
+          </div>
+
+          <p class="proj-desc">
+            Teste de velocidade Wi-Fi com estetica terminal, direto no browser.<br>
+            Interface inspirada em ferramentas CLI, rodando testes reais via<br>
+            Cloudflare Workers no edge.
+          </p>
+
+          <div class="proj-features">
+            <div><span class="feat-check">[x]</span> Teste de download / upload / latencia</div>
+            <div><span class="feat-check">[x]</span> Interface 100% terminal-style</div>
+            <div><span class="feat-check">[x]</span> Backend em Cloudflare Workers (edge)</div>
+            <div><span class="feat-check">[x]</span> Resultados em tempo real com ASCII bars</div>
+            <div><span class="feat-check">[x]</span> Deploy contínuo via GitHub Actions</div>
+          </div>
+
+          <div class="proj-meta">
+            <span>STACK:</span>
+            <span class="stack-item">Vite</span>
+            <span class="stack-item">React</span>
+            <span class="stack-item">TypeScript</span>
+            <span class="stack-item">Cloudflare Workers</span>
+          </div>
+
+          <a class="proj-link" href="https://github.com/phpont/dopewifitest" target="_blank" rel="noopener">
+            [&gt; github.com/phpont/dopewifitest]
+          </a>
+        </div>
       </div>
+    </section>
 
-      <p class="proj-desc">
-        Teste de velocidade Wi-Fi com estetica terminal, direto no browser.<br>
-        Interface inspirada em ferramentas CLI, rodando testes reais via<br>
-        Cloudflare Workers no edge.
-      </p>
+    <!-- ─── HISTORY ──────────────────────────────────────────────────── -->
+    <section id="history">
+      <div class="container">
+        <p class="section-prompt">
+          <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span
+            style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$
+          </span><span class="prompt-cmd">history</span>
+        </p>
+        <h2 class="section-title" data-typing="// timeline">&nbsp;</h2>
 
-      <div class="proj-features">
-        <div><span class="feat-check">[x]</span> Teste de download / upload / latencia</div>
-        <div><span class="feat-check">[x]</span> Interface 100% terminal-style</div>
-        <div><span class="feat-check">[x]</span> Backend em Cloudflare Workers (edge)</div>
-        <div><span class="feat-check">[x]</span> Resultados em tempo real com ASCII bars</div>
-        <div><span class="feat-check">[x]</span> Deploy contínuo via GitHub Actions</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <span class="tl-year">[2026]</span>
+            <span class="tl-sep">|</span>
+            <span class="tl-text">
+              Cursando Ciencia da Computacao, Trabalhando como full-stack dev.
+              Focado em projetos escalaveis e e desenvolvimento profissional.
+              <span class="tag">atual</span>
+            </span>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">[2025]</span>
+            <span class="tl-sep">|</span>
+            <span class="tl-text">
+              Desenvolvimento de projetos para diversas áreas, aplicacoes full-stack com Next.js e Rust.
+              Deploy e feedback continuo.
+              <span class="tag">projetos</span>
+            </span>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">[2024]</span>
+            <span class="tl-sep">|</span>
+            <span class="tl-text">
+              Aprofundamento em TypeScript e ecossistema Node. Projetos com
+              banco de dados (PostgreSQL) e APIs REST. Trabalhando como Freelancer.
+              <span class="tag">aprendizado</span>
+            </span>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">[2023]</span>
+            <span class="tl-sep">|</span>
+            <span class="tl-text">
+              Inicio da jornada em programacao. Projetos pessoais.
+              <span class="tag">inicio</span>
+            </span>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="proj-meta">
-        <span>STACK:</span>
-        <span class="stack-item">Vite</span>
-        <span class="stack-item">React</span>
-        <span class="stack-item">TypeScript</span>
-        <span class="stack-item">Cloudflare Workers</span>
+    <!-- ─── CONTACT ──────────────────────────────────────────────────── -->
+    <section id="contact">
+      <div class="container">
+        <p class="section-prompt">
+          <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span
+            style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$
+          </span><span class="prompt-cmd">cat ./contact.txt</span>
+        </p>
+        <h2 class="section-title" data-typing="// contato">&nbsp;</h2>
+
+        <div class="contact-box">
+          <div class="box-top">+==========================================================+</div>
+
+          <div class="contact-row">
+            <span class="c-key">| EMAIL.....: </span>
+            <span class="c-val">paulohponta@gmail.com</span>
+            <button id="copy-btn" onclick="copyEmail()">[COPIAR]</button>
+          </div>
+          <div class="contact-row">
+            <span class="c-key">| LINKEDIN..: </span>
+            <span class="c-val"><a href="https://linkedin.com/in/paulo-pontarolo" target="_blank"
+                rel="noopener">linkedin.com/in/paulo-pontarolo</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="c-key">| GITHUB....: </span>
+            <span class="c-val"><a href="https://github.com/phpont" target="_blank"
+                rel="noopener">github.com/phpont</a></span>
+          </div>
+
+          <div class="box-top" style="margin-top:.3rem">+==========================================================+
+          </div>
+        </div>
       </div>
+    </section>
+  </main>
 
-      <a class="proj-link" href="https://github.com/phpont/dopewifitest" target="_blank" rel="noopener">
-        [&gt; github.com/phpont/dopewifitest]
-      </a>
+  <!-- ─── FOOTER ───────────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-eof">-- EOF --<span class="cursor"> █</span></div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- ─── HISTORY ──────────────────────────────────────────────────── -->
-<section id="history">
-  <div class="container">
-    <p class="section-prompt">
-      <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$ </span><span class="prompt-cmd">history</span>
-    </p>
-    <h2 class="section-title" data-typing="// timeline">&nbsp;</h2>
+  <!-- ─── SCRIPTS ──────────────────────────────────────────────────── -->
+  <script>
+    (function () {
+      'use strict';
 
-    <div class="timeline">
-      <div class="tl-item">
-        <span class="tl-year">[2026]</span>
-        <span class="tl-sep">|</span>
-        <span class="tl-text">
-          Cursando Ciencia da Computacao, Trabalhando como full-stack dev.
-          Focado em projetos escalaveis e e desenvolvimento profissional.
-          <span class="tag">atual</span>
-        </span>
-      </div>
-      <div class="tl-item">
-        <span class="tl-year">[2025]</span>
-        <span class="tl-sep">|</span>
-        <span class="tl-text">
-          Desenvolvimento de projetos para diversas áreas, aplicacoes full-stack com Next.js e Rust.
-          Deploy e feedback continuo.
-          <span class="tag">projetos</span>
-        </span>
-      </div>
-      <div class="tl-item">
-        <span class="tl-year">[2024]</span>
-        <span class="tl-sep">|</span>
-        <span class="tl-text">
-          Aprofundamento em TypeScript e ecossistema Node. Projetos com
-          banco de dados (PostgreSQL) e APIs REST. Trabalhando como Freelancer.
-          <span class="tag">aprendizado</span>
-        </span>
-      </div>
-      <div class="tl-item">
-        <span class="tl-year">[2023]</span>
-        <span class="tl-sep">|</span>
-        <span class="tl-text">
-          Inicio da jornada em programacao. Projetos pessoais.
-          <span class="tag">inicio</span>
-        </span>
-      </div>
-    </div>
-  </div>
-</section>
+      /* ── CRT TURN-ON + BOOT SEQUENCE ───────────────────────────────── */
+      var crtEl = document.getElementById('crt-turnon');
+      var overlay = document.getElementById('boot-overlay');
+      var bootScreen = document.getElementById('boot-screen');
 
-<!-- ─── CONTACT ──────────────────────────────────────────────────── -->
-<section id="contact">
-  <div class="container">
-    <p class="section-prompt">
-      <span class="prompt-user">phpont</span><span style="color:var(--text-dim)">@portfolio</span><span style="color:var(--text-dim)">:</span><span class="prompt-dir">~</span><span style="color:var(--text-dim)">$ </span><span class="prompt-cmd">cat ./contact.txt</span>
-    </p>
-    <h2 class="section-title" data-typing="// contato">&nbsp;</h2>
+      var skipBoot = sessionStorage.getItem('booted');
 
-    <div class="contact-box">
-      <div class="box-top">+==========================================================+</div>
-
-      <div class="contact-row">
-        <span class="c-key">|  EMAIL.....: </span>
-        <span class="c-val">paulohponta@gmail.com</span>
-        <button id="copy-btn" onclick="copyEmail()">[COPIAR]</button>
-      </div>
-      <div class="contact-row">
-        <span class="c-key">|  LINKEDIN..: </span>
-        <span class="c-val"><a href="https://linkedin.com/in/paulo-pontarolo" target="_blank" rel="noopener">linkedin.com/in/paulo-pontarolo</a></span>
-      </div>
-      <div class="contact-row">
-        <span class="c-key">|  GITHUB....: </span>
-        <span class="c-val"><a href="https://github.com/phpont" target="_blank" rel="noopener">github.com/phpont</a></span>
-      </div>
-
-      <div class="box-top" style="margin-top:.3rem">+==========================================================+</div>
-    </div>
-  </div>
-</section>
-</main>
-
-<!-- ─── FOOTER ───────────────────────────────────────────────────── -->
-<footer>
-  <div class="container">
-    <div class="footer-eof">-- EOF --<span class="cursor"> █</span></div>
-  </div>
-</footer>
-
-<!-- ─── SCRIPTS ──────────────────────────────────────────────────── -->
-<script>
-(function() {
-'use strict';
-
-/* ── CRT TURN-ON + BOOT SEQUENCE ───────────────────────────────── */
-var crtEl = document.getElementById('crt-turnon');
-var overlay = document.getElementById('boot-overlay');
-var bootScreen = document.getElementById('boot-screen');
-
-var skipBoot = sessionStorage.getItem('booted');
-
-if (skipBoot) {
-  crtEl.style.display = 'none';
-  overlay.style.display = 'none';
-} else {
-  sessionStorage.setItem('booted', '1');
-
-  // CRT turn-on: white line expands, then fades
-  setTimeout(function() { crtEl.style.display = 'none'; }, 700);
-
-  // Show boot screen after CRT turn-on
-  setTimeout(function() { bootScreen.classList.add('visible'); }, 500);
-
-  // BIOS POST lines
-  var bootLines = [
-    { el: 'b-title',  delay: 550,  text: 'PHPONT BIOS v2.0', cls: 'boot-white' },
-    { el: 'b-copy',   delay: 600,  text: 'Copyright (C) 2026 Paulo Pontarolo. All Rights Reserved.' },
-    { el: 'b-sep',    delay: 650,  text: '────────────────────────────────────────────────────' },
-    { el: 'b-cpu',    delay: 750,  text: 'CPU: Full-Stack Developer @ 3.2GHz' },
-    { el: 'b-ram',    delay: 850,  text: '', special: 'ram' },
-    { el: 'b-kb',     delay: 1500, text: 'Keyboard............ OK' },
-    { el: 'b-vid',    delay: 1650, text: 'Video (CRT Phosphor). OK' },
-    { el: 'b-sep2',   delay: 1750, text: '' },
-    { el: 'b-detect', delay: 1800, text: 'Detecting IDE drives...' },
-    { el: 'b-d1',     delay: 1950, text: '  Primary Master:   whoami.bin      [OK]' },
-    { el: 'b-d2',     delay: 2050, text: '  Primary Slave:    skills.bin      [OK]' },
-    { el: 'b-d3',     delay: 2150, text: '  Secondary Master: projects.bin    [OK]' },
-    { el: 'b-d4',     delay: 2250, text: '  Secondary Slave:  contact.bin     [OK]' },
-    { el: 'b-d5',     delay: 2350, text: '  Tertiary:         history.bin     [OK]' },
-    { el: 'b-sep3',   delay: 2450, text: '' },
-  ];
-
-  bootLines.forEach(function(item) {
-    setTimeout(function() {
-      var node = document.getElementById(item.el);
-      if (!node) return;
-
-      if (item.special === 'ram') {
-        // Animated RAM counter
-        var memTarget = 8192;
-        var memCurrent = 0;
-        var memStep = 256;
-        var memInterval = setInterval(function() {
-          memCurrent += memStep;
-          if (memCurrent >= memTarget) {
-            memCurrent = memTarget;
-            clearInterval(memInterval);
-            node.textContent = 'Memory Test: ' + memTarget + 'K OK';
-          } else {
-            node.textContent = 'Memory Test: ' + memCurrent + 'K...';
-          }
-        }, 20);
+      if (skipBoot) {
+        crtEl.style.display = 'none';
+        overlay.style.display = 'none';
       } else {
-        node.textContent = item.text;
+        sessionStorage.setItem('booted', '1');
+
+        // CRT turn-on: white line expands, then fades
+        setTimeout(function () { crtEl.style.display = 'none'; }, 700);
+
+        // Show boot screen after CRT turn-on
+        setTimeout(function () { bootScreen.classList.add('visible'); }, 500);
+
+        // BIOS POST lines
+        var bootLines = [
+          { el: 'b-title', delay: 550, text: 'PHPONT BIOS v2.0', cls: 'boot-white' },
+          { el: 'b-copy', delay: 600, text: 'Copyright (C) 2026 Paulo Pontarolo. All Rights Reserved.' },
+          { el: 'b-sep', delay: 650, text: '────────────────────────────────────────────────────' },
+          { el: 'b-cpu', delay: 750, text: 'CPU: Full-Stack Developer @ 3.2GHz' },
+          { el: 'b-ram', delay: 850, text: '', special: 'ram' },
+          { el: 'b-kb', delay: 1500, text: 'Keyboard............ OK' },
+          { el: 'b-vid', delay: 1650, text: 'Video (CRT Phosphor). OK' },
+          { el: 'b-sep2', delay: 1750, text: '' },
+          { el: 'b-detect', delay: 1800, text: 'Detecting IDE drives...' },
+          { el: 'b-d1', delay: 1950, text: '  Primary Master:   whoami.bin      [OK]' },
+          { el: 'b-d2', delay: 2050, text: '  Primary Slave:    skills.bin      [OK]' },
+          { el: 'b-d3', delay: 2150, text: '  Secondary Master: projects.bin    [OK]' },
+          { el: 'b-d4', delay: 2250, text: '  Secondary Slave:  contact.bin     [OK]' },
+          { el: 'b-d5', delay: 2350, text: '  Tertiary:         history.bin     [OK]' },
+          { el: 'b-sep3', delay: 2450, text: '' },
+        ];
+
+        bootLines.forEach(function (item) {
+          setTimeout(function () {
+            var node = document.getElementById(item.el);
+            if (!node) return;
+
+            if (item.special === 'ram') {
+              var memTarget = 8192;
+              var memCurrent = 0;
+              var memStep = 256;
+              var memInterval = setInterval(function () {
+                memCurrent += memStep;
+                if (memCurrent >= memTarget) {
+                  memCurrent = memTarget;
+                  clearInterval(memInterval);
+                  node.textContent = 'Memory Test: ' + memTarget + 'K OK';
+                } else {
+                  node.textContent = 'Memory Test: ' + memCurrent + 'K...';
+                }
+              }, 20);
+            } else {
+              node.textContent = item.text;
+            }
+          }, item.delay);
+        });
+
+        var splash = document.getElementById('boot-splash');
+        setTimeout(function () {
+          splash.textContent =
+            ' ____  _   _ ____   ___  _   _ _____\n' +
+            '|  _ \\| | | |  _ \\ / _ \\| \\ | |_   _|\n' +
+            '| |_) | |_| | |_) | | | |  \\| | | |\n' +
+            '|  __/|  _  |  __/| |_| | |\\  | | |\n' +
+            '|_|   |_| |_|_|    \\___/|_| \\_| |_|\n' +
+            '             PORTFOLIO v2.0';
+          splash.classList.add('visible');
+        }, 2550);
+
+        setTimeout(function () {
+          var barFill = document.querySelector('#boot-bar .bar-fill');
+          var barEmpty = document.querySelector('#boot-bar .bar-empty');
+          var barPct = document.querySelector('#boot-bar .bar-pct');
+          var total = 24;
+          var step = 0;
+          var barInterval = setInterval(function () {
+            step++;
+            barFill.textContent = '█'.repeat(step);
+            barEmpty.textContent = '·'.repeat(Math.max(0, total - step));
+            barPct.textContent = Math.round((step / total) * 100) + '%';
+            if (step >= total) {
+              clearInterval(barInterval);
+              // Show prompt
+              setTimeout(function () {
+                document.getElementById('boot-prompt').classList.add('visible');
+              }, 100);
+            }
+          }, 30);
+        }, 2700);
+
+        // Fade out boot overlay
+        setTimeout(function () {
+          overlay.classList.add('fade-out');
+          setTimeout(function () { overlay.style.display = 'none'; }, 600);
+        }, 4000);
       }
-    }, item.delay);
-  });
 
-  // Show ASCII splash "PHPONT PORTFOLIO"
-  var splash = document.getElementById('boot-splash');
-  setTimeout(function() {
-    splash.textContent =
-      ' ____  _   _ ____   ___  _   _ _____\n' +
-      '|  _ \\| | | |  _ \\ / _ \\| \\ | |_   _|\n' +
-      '| |_) | |_| | |_) | | | |  \\| | | |\n' +
-      '|  __/|  _  |  __/| |_| | |\\  | | |\n' +
-      '|_|   |_| |_|_|    \\___/|_| \\_| |_|\n' +
-      '             PORTFOLIO v2.0';
-    splash.classList.add('visible');
-  }, 2550);
+      var typingObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var text = el.dataset.typing;
+          if (!text || el.classList.contains('typed')) return;
+          el.classList.add('typed', 'visible');
+          el.textContent = '';
+          var i = 0;
+          var interval = setInterval(function () {
+            el.textContent += text[i];
+            i++;
+            if (i >= text.length) clearInterval(interval);
+          }, 30);
+          typingObserver.unobserve(el);
+        });
+      }, { threshold: 0.3 });
 
-  // Animated loading bar
-  setTimeout(function() {
-    var barFill = document.querySelector('#boot-bar .bar-fill');
-    var barEmpty = document.querySelector('#boot-bar .bar-empty');
-    var barPct = document.querySelector('#boot-bar .bar-pct');
-    var total = 24;
-    var step = 0;
-    var barInterval = setInterval(function() {
-      step++;
-      barFill.textContent = '█'.repeat(step);
-      barEmpty.textContent = '·'.repeat(Math.max(0, total - step));
-      barPct.textContent = Math.round((step / total) * 100) + '%';
-      if (step >= total) {
-        clearInterval(barInterval);
-        // Show prompt
-        setTimeout(function() {
-          document.getElementById('boot-prompt').classList.add('visible');
-        }, 100);
+      document.querySelectorAll('.section-title[data-typing]').forEach(function (el) {
+        typingObserver.observe(el);
+      });
+
+      var BAR_LEN = 16;
+
+      function animateBar(wrap) {
+        var fill = wrap.querySelector('.load-bar-fill');
+        var empty = wrap.querySelector('.load-bar-empty');
+        var pct = wrap.querySelector('.load-bar-pct');
+        if (!fill || !empty || !pct) return;
+
+        var step = 0;
+        var total = BAR_LEN;
+
+        var tick = setInterval(function () {
+          step++;
+          var filled = Math.round((step / total) * total);
+          fill.textContent = '█'.repeat(filled);
+          empty.textContent = '░'.repeat(Math.max(0, total - filled));
+          pct.textContent = ' ' + Math.round((step / total) * 100) + '%';
+          if (step >= total) clearInterval(tick);
+        }, 50);
       }
-    }, 30);
-  }, 2700);
 
-  // Fade out boot overlay
-  setTimeout(function() {
-    overlay.classList.add('fade-out');
-    setTimeout(function() { overlay.style.display = 'none'; }, 600);
-  }, 4000);
-}
+      var barObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var card = entry.target;
+          var wrap = card.querySelector('[data-loadbar]');
+          if (wrap && !wrap.dataset.loaded) {
+            wrap.dataset.loaded = '1';
+            setTimeout(function () { animateBar(wrap); }, 200);
+          }
+          barObserver.unobserve(card);
+        });
+      }, { threshold: 0.2 });
 
-/* ── SECTION TITLE TYPING EFFECT ───────────────────────────────── */
-var typingObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (!entry.isIntersecting) return;
-    var el = entry.target;
-    var text = el.dataset.typing;
-    if (!text || el.classList.contains('typed')) return;
-    el.classList.add('typed', 'visible');
-    el.textContent = '';
-    var i = 0;
-    var interval = setInterval(function() {
-      el.textContent += text[i];
-      i++;
-      if (i >= text.length) clearInterval(interval);
-    }, 30);
-    typingObserver.unobserve(el);
-  });
-}, { threshold: 0.3 });
+      document.querySelectorAll('.project-card[data-project]').forEach(function (el) {
+        barObserver.observe(el);
+      });
 
-document.querySelectorAll('.section-title[data-typing]').forEach(function(el) {
-  typingObserver.observe(el);
-});
+      window.copyEmail = function () {
+        var btn = document.getElementById('copy-btn');
+        navigator.clipboard.writeText('paulohponta@gmail.com').then(function () {
+          btn.textContent = '[COPIADO!]';
+          btn.classList.add('copied');
+          setTimeout(function () {
+            btn.textContent = '[COPIAR]';
+            btn.classList.remove('copied');
+          }, 2000);
+        }).catch(function () {
+          btn.textContent = '[ERRO]';
+          setTimeout(function () { btn.textContent = '[COPIAR]'; }, 2000);
+        });
+      };
 
-/* ── LOADING BARS ───────────────────────────────────────────────── */
-var BAR_LEN = 16;
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
 
-function animateBar(wrap) {
-  var fill  = wrap.querySelector('.load-bar-fill');
-  var empty = wrap.querySelector('.load-bar-empty');
-  var pct   = wrap.querySelector('.load-bar-pct');
-  if (!fill || !empty || !pct) return;
-
-  var step = 0;
-  var total = BAR_LEN;
-
-  var tick = setInterval(function() {
-    step++;
-    var filled = Math.round((step / total) * total);
-    fill.textContent  = '█'.repeat(filled);
-    empty.textContent = '░'.repeat(Math.max(0, total - filled));
-    pct.textContent   = ' ' + Math.round((step / total) * 100) + '%';
-    if (step >= total) clearInterval(tick);
-  }, 50);
-}
-
-var barObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (!entry.isIntersecting) return;
-    var card = entry.target;
-    var wrap = card.querySelector('[data-loadbar]');
-    if (wrap && !wrap.dataset.loaded) {
-      wrap.dataset.loaded = '1';
-      setTimeout(function() { animateBar(wrap); }, 200);
-    }
-    barObserver.unobserve(card);
-  });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('.project-card[data-project]').forEach(function(el) {
-  barObserver.observe(el);
-});
-
-/* ── COPY EMAIL ─────────────────────────────────────────────────── */
-window.copyEmail = function() {
-  var btn = document.getElementById('copy-btn');
-  navigator.clipboard.writeText('paulohponta@gmail.com').then(function() {
-    btn.textContent = '[COPIADO!]';
-    btn.classList.add('copied');
-    setTimeout(function() {
-      btn.textContent = '[COPIAR]';
-      btn.classList.remove('copied');
-    }, 2000);
-  }).catch(function() {
-    btn.textContent = '[ERRO]';
-    setTimeout(function() { btn.textContent = '[COPIAR]'; }, 2000);
-  });
-};
-
-/* ── KONAMI CODE ────────────────────────────────────────────────── */
-(function() {
-  var code = [38,38,40,40,37,39,37,39,66,65];
-  var pos = 0;
-  document.addEventListener('keydown', function(e) {
-    if (e.keyCode === code[pos]) {
-      pos++;
-      if (pos === code.length) {
-        pos = 0;
-        document.body.classList.toggle('konami-mode');
-      }
-    } else {
-      pos = 0;
-    }
-  });
-})();
-
-/* ── SMOOTH SCROLL ──────────────────────────────────────────────── */
-document.querySelectorAll('a[href^="#"]').forEach(function(link) {
-  link.addEventListener('click', function(e) {
-    var target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-})();
-</script>
+    })();
+  </script>
 
 </body>
+
 </html>
