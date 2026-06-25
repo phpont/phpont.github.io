@@ -1,0 +1,315 @@
+.section {
+  width: 100%;
+  height: 100svh;
+  min-height: 720px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: linear-gradient(180deg, #020202 0%, #030305 44%, #020202 100%);
+  box-sizing: border-box;
+}
+
+/* Rich, atmospheric local color pools with high blur and low opacity */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  background:
+    radial-gradient(ellipse at 28% 30%, rgba(122, 162, 247, 0.105) 0%, rgba(122, 162, 247, 0.032) 32%, transparent 62%),
+    radial-gradient(ellipse at 66% 58%, rgba(244, 244, 239, 0.052) 0%, rgba(244, 244, 239, 0.018) 28%, transparent 58%),
+    radial-gradient(ellipse at 82% 24%, rgba(18, 24, 39, 0.42) 0%, transparent 54%);
+  filter: blur(22px);
+  opacity: 0.82;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Soft dark vignette transitions to preserve radial depth values */
+.section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2, 2, 2, 0.25) 0%, transparent 18%, transparent 78%, rgba(2, 2, 2, 0.28) 100%),
+    radial-gradient(ellipse at center, transparent 42%, rgba(2, 2, 2, 0.46) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.inner {
+  width: min(100% - 12vw, 1280px);
+  height: min(760px, 78svh);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  position: relative;
+  isolation: isolate; /* Create isolation group for local fog */
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+/* Local typographic fog overlay behind composition */
+.inner::before {
+  content: "";
+  position: absolute;
+  inset: -18% -10%;
+  background:
+    radial-gradient(ellipse at 34% 34%, rgba(122, 162, 247, 0.08), transparent 46%),
+    radial-gradient(ellipse at 72% 68%, rgba(244, 244, 239, 0.042), transparent 42%);
+  filter: blur(34px);
+  opacity: 0.75;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.quoteBlock {
+  grid-column: 1 / 10;
+  grid-row: 2 / 6;
+  max-width: 100%;
+  width: max-content;
+  margin: 0;
+  padding: 0.08em 0 0.12em 0;
+  display: grid;
+  grid-template-columns: clamp(2.8rem, 4.8vw, 5.4rem) auto;
+  column-gap: clamp(0.35rem, 0.9vw, 0.9rem);
+  align-items: start;
+  position: relative;
+  overflow: visible;
+}
+
+/* Elegant, column-aligned serif quote mark */
+.quoteMark {
+  grid-column: 1;
+  grid-row: 1;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(5rem, 8vw, 8rem);
+  line-height: 0.72;
+  color: rgba(122, 162, 247, 0.28);
+  opacity: 0;
+  transform: translateY(-0.04em);
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 950ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.quoteText {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: visible;
+}
+
+.quoteLineWrapper {
+  overflow: visible; /* Prevent character clipping on dynamic translates */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.quoteLine {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.6vw, 5.4rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: var(--text-main);
+  margin: 0;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 950ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 950ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.author {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  align-self: flex-end; /* Align credit to the right inner edge of the text column */
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 950ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 950ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.description {
+  grid-column: 8 / 13; /* Shifted to column 8 for greater negative space */
+  grid-row: 7 / 9;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.15vw, 1.18rem);
+  line-height: 1.68;
+  font-weight: 400;
+  color: rgba(244, 244, 239, 0.68);
+  max-width: 560px; /* Reduced width for a more compact editorial layout */
+  width: 100%;
+  margin: 0;
+  padding-top: clamp(1.2rem, 2.4vh, 2.2rem); /* Vertical padding-top respiro */
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 950ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 950ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.description strong {
+  color: rgba(244, 244, 239, 0.88);
+  font-weight: 600;
+}
+
+/* Stagger transition delay logic */
+.visible .quoteMark {
+  opacity: 0.55;
+  transition-delay: 0ms;
+}
+
+.visible .quoteLineWrapper:nth-child(1) .quoteLine {
+  opacity: 0.95;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+
+.visible .quoteLineWrapper:nth-child(2) .quoteLine {
+  opacity: 0.95;
+  transform: translateY(0);
+  transition-delay: 130ms;
+}
+
+.visible .quoteLineWrapper:nth-child(3) .quoteLine {
+  opacity: 0.95;
+  transform: translateY(0);
+  transition-delay: 260ms;
+}
+
+.visible .quoteLineWrapper:nth-child(4) .quoteLine {
+  opacity: 0.95;
+  transform: translateY(0);
+  transition-delay: 390ms;
+}
+
+.visible .author {
+  opacity: 0.7;
+  transform: translateY(0);
+  transition-delay: 560ms;
+}
+
+.visible .description {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 760ms;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .inner {
+    width: min(100% - 8vw, 1000px);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+  }
+
+  .quoteBlock {
+    width: 100%;
+  }
+
+  .description {
+    align-self: flex-start;
+    max-width: 600px;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    height: auto;
+    min-height: 100svh;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .quoteBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .quoteMark {
+    display: none; /* Hide quote mark on mobile to prevent small-screen clutter */
+  }
+
+  .quoteText {
+    width: 100%;
+  }
+
+  .quoteLine {
+    font-size: clamp(1.8rem, 7.5vw, 2.8rem);
+    white-space: normal; /* allow wrap on mobile */
+    line-height: 1.1;
+  }
+
+  .author {
+    margin-top: 1rem;
+    align-self: flex-end;
+  }
+
+  .description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    padding-top: 0;
+  }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .quoteLine,
+  .author,
+  .description,
+  .quoteMark {
+    transform: none !important;
+    transition-duration: 120ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .visible .quoteMark {
+    opacity: 0.55 !important;
+    transform: none !important;
+    transition-duration: 120ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .visible .quoteLineWrapper:nth-child(1) .quoteLine,
+  .visible .quoteLineWrapper:nth-child(2) .quoteLine,
+  .visible .quoteLineWrapper:nth-child(3) .quoteLine,
+  .visible .quoteLineWrapper:nth-child(4) .quoteLine,
+  .visible .author,
+  .visible .description {
+    opacity: 1;
+    transform: none !important;
+    transition-duration: 120ms !important;
+    transition-delay: 0ms !important;
+  }
+}
