@@ -88,9 +88,10 @@ const SceneManager = () => {
   );
 };
 
-export const ColdFieldCanvas = () => {
+export const ColdFieldCanvas = ({ className }: { className?: string }) => {
   return (
     <div
+      className={className}
       style={{
         position: 'absolute',
         top: 0,

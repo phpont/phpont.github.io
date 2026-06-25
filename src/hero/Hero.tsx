@@ -71,7 +71,7 @@ export const Hero = () => {
 
   return (
     <>
-      <ColdFieldCanvas />
+      <ColdFieldCanvas className={styles.canvasFadeIn} />
       <main className={styles.heroContainer}>
         <div 
           className={styles.content} 
