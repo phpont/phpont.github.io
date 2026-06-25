@@ -1,0 +1,11 @@
+:root {
+  /* Colors - Black Signal Palette */
+  --bg-base: #020202;
+  --text-main: #F4F4EF;
+  --text-muted: #9A9EA6;
+  --accent-cold: #7AA2F7;
+
+  /* Typography */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
